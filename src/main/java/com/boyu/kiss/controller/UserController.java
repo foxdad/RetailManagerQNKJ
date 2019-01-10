@@ -23,7 +23,7 @@ public class UserController {
 	@ResponseBody
 	public User getUser(Integer id){
 		User user = serviceImpl.selectById(id);
-		int i = 6;
+		int i = 7;
 		return user;
 	}
 	
