@@ -8,10 +8,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.boyu.kiss.entity.OrderVO;
 import com.boyu.kiss.entity.Orderitem;
 import com.boyu.kiss.entity.Store;
 import com.boyu.kiss.entity.User;
 import com.boyu.kiss.entity.UserInfo;
+import com.boyu.kiss.mapper.OrderMapper;
 import com.boyu.kiss.mapper.UserMapper;
 
 import com.boyu.kiss.service.IUserService;
@@ -30,6 +32,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper,User> implements
 	private UserInfoServiceImpl userInfoService;
 	@Autowired
 	private StoreServiceImpl storeService;
+	@Autowired
+	private OrderServiceImpl orderService;
 	public Map<String, Object> login(String username, String password, int roleId) {
 		//根据用户名和角色id查询用户是否存在
 		Map<String, Object> map = new HashMap<String,Object>();
@@ -62,7 +66,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper,User> implements
 					resultMap.put("store", store);
 				}
 				else if(roleId == 1) {
-					
+					int userId = list.get(0).getId();
+					List<OrderVO> order = orderService.getOrderByUserId(userId);
+					resultMap.put("order", order);
 				}
 				// maps.put("userlist", list);
 			}
