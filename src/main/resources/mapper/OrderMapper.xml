@@ -4,5 +4,39 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.boyu.kiss.mapper.OrderMapper">
 
+	<!-- collection嵌套结果集的方式，定义关联的集合类型元素的封装规则-->
+	
+	<!-- 嵌套结果集的方式，使用collection标签定义关联的集合类型的属性封装规则 -->
+	<resultMap type="com.boyu.kiss.entity.OrderVO" id="getOrderitemResultMap">
+		<id column="id" property="id"/>
+		<result column="address" property="address"/>
+		<result column="consignee" property="consignee"/>
+		<result column="freightInsurance" property="freightInsurance"/>
+		<result column="leave_message" property="leave_message"/>
+		<result column="money" property="money"/>
+		<result column="orderid" property="orderid"/>
+		<result column="orderTime" property="orderTime"/>
+		<result column="phone" property="phone"/>
+		<result column="state" property="state"/>
+		<result column="userId" property="userId"/>
+		<!-- 
+		collection定义关联结合类型的属性的封装规则
+		ofType：指定集合里面元素的类型
+		-->
+		<collection property="orderitem" ofType="com.boyu.kiss.entity.OrderVO">
+			<!-- 定义这个集合中元素的封装规则 -->
+			<id column="id" property="id"/>
+			<result column="goodsId" property="goodsId"/>
+			<result column="number" property="number"/>
+			<result column="subtotal" property="subtotal"/>
+		</collection>
+	
+	</resultMap>
+	
+	<!-- public Department getDeptByIdPlus(Integer id); -->
+	<select id="getOrderByUserId" resultMap="getOrderitemResultMap" >
+		SELECT *,i.id,i.goodsId,i.number,i.subtotal,i.storeId 
+		FROM t_order o,t_orderitem i WHERE o.id = i.orderId and userId = #{userId}
+	</select>
 
 </mapper>
