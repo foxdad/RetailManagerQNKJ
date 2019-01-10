@@ -12,6 +12,4 @@ buildNumber.properties
 .classpath
 .settings
 .metadata
-*.class
 
-target/classes/com/boyu/kiss/controller/PlbIndexController.class
