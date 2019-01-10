@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.boyu.kiss.entity.Orderitem;
 import com.boyu.kiss.mapper.OrderitemMapper;
-import com.boyu.kiss.service.IOrderitemService;
+import com.boyu.kiss.service.IOrderService;
 @Service
-public class OrderitemServiceImpl extends BaseServiceImpl<OrderitemMapper,Orderitem> implements IOrderitemService{
+public class OrderitemServiceImpl extends BaseServiceImpl<OrderitemMapper,Orderitem> implements IOrderService{
 
 	//根据店铺id查找所有属于这个店铺的订单项
 	public List<Orderitem> selectByStoreId(int storeId){
