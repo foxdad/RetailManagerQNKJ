@@ -35,7 +35,7 @@ public class PlbIndexController {
 		Map<String,Object> resultMap = new HashMap<>();
 		List<AdvertisementResult> rList = new ArrayList<>();
 		AdvertisementResult aResult = new AdvertisementResult();
-		String url = request.getServletContext().getRealPath("/");
+		String url = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
 		for (Advertisement advertisement : aList) {
 			aResult.setAdvertisementId(advertisement.getMarketid());			
 			aResult.setAdvertisementURL(url+advertisement.getAdvertisementURL());
