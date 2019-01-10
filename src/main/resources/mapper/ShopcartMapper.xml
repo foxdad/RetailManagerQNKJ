@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boyu.kiss.mapper.ShopcartMapper">
+
+	<!-- collection嵌套结果集的方式，定义关联的集合类型元素的封装规则-->
+	
+	<!-- 嵌套结果集的方式，使用collection标签定义关联的集合类型的属性封装规则 -->
+	<resultMap type="com.boyu.kiss.result.ShopcartResults" id="getShopcartResultMap">
+		<id column="marketid" property="id"/>
+		<result column="marketName" property="marketName"/>
+		<result column="userId" property="userId"/>
+	
+		<!-- 
+		collection定义关联结合类型的属性的封装规则
+		ofType：指定集合里面元素的类型
+		-->
+		<collection property="shopcartVO" ofType="com.boyu.kiss.entity.ShopcartVO">
+			<!-- 定义这个集合中元素的封装规则 -->
+			<id column="id" property="id"/>
+			<result column="goodsName" property="goodsName"/>
+			<result column="image" property="image"/>
+			<result column="import" property="import_"/>
+			<result column="info" property="info"/>
+			<result column="minNum" property="minNum"/>
+			<result column="retailPrice" property="price"/>
+			<result column="storeId" property="storeId"/>
+			<result column="unit" property="unit"/>
+			<result column="commodityid" property="commodityid"/>
+			<result column="num" property="num"/>
+		</collection>
+	
+	</resultMap>
+	
+	<!-- public Department getDeptByIdPlus(Integer id); -->
+	<select id="getShopcartByUserId" resultMap="getShopcartResultMap" >
+		SELECT s.*,(SELECT marketName FROM market) AS marketName,
+c.id AS commodityid,c.goodsName,c.retailPrice,c.Image,c.unit,c.minNum,c.`import`,c.info,c.storeId 
+FROM t_shopcart s,t_commodity c WHERE c.id = s.commodityid and userId = #{userId}
+	</select>
+
+</mapper>

@@ -15,7 +15,7 @@ import com.boyu.kiss.entity.User;
 import com.boyu.kiss.entity.UserInfo;
 import com.boyu.kiss.mapper.OrderMapper;
 import com.boyu.kiss.mapper.UserMapper;
-
+import com.boyu.kiss.result.ShopcartResults;
 import com.boyu.kiss.service.IUserService;
 
 /**
@@ -34,6 +34,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper,User> implements
 	private StoreServiceImpl storeService;
 	@Autowired
 	private OrderServiceImpl orderService;
+	@Autowired
+	private ShopcartServiceImpl shopcartService;
 	public Map<String, Object> login(String username, String password, int roleId) {
 		//根据用户名和角色id查询用户是否存在
 		Map<String, Object> map = new HashMap<String,Object>();
@@ -46,16 +48,17 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper,User> implements
 			//存在则比较密码是否正确
 			User user = list.get(0);
 			String pwd = user.getPassword();
-			
+			int storeId = user.getStoreId();
+			int userId = user.getId();
 			if(!pwd.equals(password)) {
 				resultMap.put("result","用户名或密码错误");
 			}
 			else {
 				if(roleId == 2) {
-					int storeId = user.getStoreId();
+					
 					List<Orderitem> orderitemList = orderitemService.selectByStoreId(storeId);
 					
-					int userId = list.get(0).getId();
+					
 					UserInfo userInfo = userInfoService.selectById(userId);
 					
 					Store store = storeService.selectById(storeId);
@@ -66,9 +69,20 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper,User> implements
 					resultMap.put("store", store);
 				}
 				else if(roleId == 1) {
-					int userId = list.get(0).getId();
+					//根据用户id,查询属于这个用户的所有订单
 					List<OrderVO> order = orderService.getOrderByUserId(userId);
+					//根据店铺id查询店铺信息
+					Store store = storeService.selectById(storeId);
+					
+					UserInfo userInfo = userInfoService.selectById(userId);
+					
+					List<ShopcartResults> shopcartList = shopcartService.getShopcartByUserId(userId);
+					
 					resultMap.put("order", order);
+					resultMap.put("user", user);
+					resultMap.put("store", store);
+					resultMap.put("userInfo", userInfo);
+					resultMap.put("shopcartList", shopcartList);
 				}
 				// maps.put("userlist", list);
 			}
