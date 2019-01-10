@@ -45,3 +45,4 @@ Thumbs.db  
 *.iml
 *.ipr
 
+target/classes/com/boyu/kiss/controller/UserController.class
