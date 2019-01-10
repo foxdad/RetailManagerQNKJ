@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: RetailManager
+Implementation-Version: 1.0
+Built-By: ztl
+Implementation-Vendor-Id: com.boyu.kiss
+Build-Jdk: 1.8.0_181
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/RetailManager
+Created-By: Maven Integration for Eclipse
+
