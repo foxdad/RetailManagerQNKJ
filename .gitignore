@@ -3,6 +3,5 @@
 .factorypath
 target/
 .settings/
-pom.*
 .apt_generated/
 
