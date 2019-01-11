@@ -10,7 +10,7 @@ public class ShopcartVO {
 
 	private String image;
 
-	private int import_;
+	private int imported;
 
 	private String info;
 
@@ -51,12 +51,12 @@ public class ShopcartVO {
 		this.image = image;
 	}
 
-	public int getImport_() {
-		return import_;
+	public int getImported() {
+		return imported;
 	}
 
 	public void setImport_(int import_) {
-		this.import_ = import_;
+		this.imported = import_;
 	}
 
 	public String getInfo() {

@@ -19,7 +19,7 @@
 			<id column="id" property="id"/>
 			<result column="goodsName" property="goodsName"/>
 			<result column="image" property="image"/>
-			<result column="import" property="import_"/>
+			<result column="imported" property="imported"/>
 			<result column="info" property="info"/>
 			<result column="minNum" property="minNum"/>
 			<result column="retailPrice" property="price"/>
@@ -43,7 +43,7 @@
 			<id column="id" property="id"/>
 			<result column="goodsName" property="goodsName"/>
 			<result column="image" property="image"/>
-			<result column="import" property="import_"/>
+			<result column="imported" property="imported"/>
 			<result column="info" property="info"/>
 			<result column="minNum" property="minNum"/>
 			<result column="wholesalePrice" property="price"/>

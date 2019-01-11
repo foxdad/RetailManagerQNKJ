@@ -6,18 +6,5 @@
 	<select id="findUserByRoleAndName" resultType="com.boyu.kiss.entity.User">
 		SELECT * FROM t_user WHERE userName = #{userName} AND roleid = #{roleId1} OR roleid = #{roleId2}
 	</select>
-	<resultMap type="com.boyu.kiss.entity.Aaa" id="test">
-		<id column="id" property="id"/>
-		<result column="name" property="name"/>
-		<result column="sex" property="sex"/>
-		<collection property="yyy" ofType="com.boyu.kiss.entity.Yyy">
-			<id column="yid" property="yid"/>
-			<result column="course" property="course"/>
-			<result column="score" property="score"/>
-		</collection>
-	</resultMap>
 	
-	<select id="test" resultMap="test">
-		SELECT * FROM aaa,yyy WHERE aaa.id = yyy.aid
-	</select>
 </mapper>

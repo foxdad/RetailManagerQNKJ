@@ -2,9 +2,11 @@ package com.boyu.kiss.entity;
 
 import java.io.Serializable;
 
+import com.alibaba.druid.pool.ha.selector.RandomDataSourceValidateThread;
 import com.baomidou.mybatisplus.annotations.TableId;
 
 import java.math.BigDecimal;
+import java.security.interfaces.RSAMultiPrimePrivateCrtKey;
 
 
 /**
@@ -13,192 +15,166 @@ import java.math.BigDecimal;
  */
 
 public class Commodity implements Serializable {
-	private static final long serialVersionUID = 1L;
-
-	@TableId
-	private int id;
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9219318847544351040L;
 	
-	private int _isShelf;
-
-	private int _stock;
-
-	private String brand;
-
-	private String detailedurl;
-
-	private int firsttypeId;
-
+	@TableId
+	private Integer id;
 	private String goodsName;
-
+	private float wholesalePrice;
+	private float retailPrice;
+	private float marketPrice;
 	private String image;
-
-
-	private int import_;
-
-	private String info;
-
-	private BigDecimal marketPrice;
-
-	private int minNum;
-
-	private BigDecimal retailPrice;
-
-	private int secondtypeId;
-
-	private String shelfLife;
-
-	private int storeId;
-
+	private String detailedurl;
 	private String unit;
-
-	private BigDecimal wholesalePrice;
-
-	public Commodity() {
+	private Integer minNum;
+	private String 	shelfLife;
+	private String brand;
+	private Integer secondtypeId;
+	private Integer imported;
+	private String info;
+	private Integer firsttypeId;
+	private Integer storeId;
+	private Integer stock;
+	private Integer isShelf;
+	public Integer getId() {
+		return id;
 	}
-
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public int get_isShelf() {
-		return this._isShelf;
-	}
-
-	public void set_isShelf(int _isShelf) {
-		this._isShelf = _isShelf;
-	}
-
-	public int get_stock() {
-		return this._stock;
-	}
-
-	public void set_stock(int _stock) {
-		this._stock = _stock;
-	}
-
-	public String getBrand() {
-		return this.brand;
-	}
-
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
-
-	public String getDetailedurl() {
-		return this.detailedurl;
-	}
-
-	public void setDetailedurl(String detailedurl) {
-		this.detailedurl = detailedurl;
-	}
-
-	public int getFirsttypeId() {
-		return this.firsttypeId;
-	}
-
-	public void setFirsttypeId(int firsttypeId) {
-		this.firsttypeId = firsttypeId;
-	}
-
 	public String getGoodsName() {
-		return this.goodsName;
+		return goodsName;
 	}
-
 	public void setGoodsName(String goodsName) {
 		this.goodsName = goodsName;
 	}
-
-	public String getImage() {
-		return this.image;
+	public float getWholesalePrice() {
+		return wholesalePrice;
 	}
-
+	public void setWholesalePrice(float wholesalePrice) {
+		this.wholesalePrice = wholesalePrice;
+	}
+	public float getRetailPrice() {
+		return retailPrice;
+	}
+	public void setRetailPrice(float retailPrice) {
+		this.retailPrice = retailPrice;
+	}
+	public float getMarketPrice() {
+		return marketPrice;
+	}
+	public void setMarketPrice(float marketPrice) {
+		this.marketPrice = marketPrice;
+	}
+	public String getImage() {
+		return image;
+	}
 	public void setImage(String image) {
 		this.image = image;
 	}
-
-	public int getImport_() {
-		return this.import_;
+	public String getDetailedurl() {
+		return detailedurl;
 	}
-
-	public void setImport_(int import_) {
-		this.import_ = import_;
+	public void setDetailedurl(String detailedurl) {
+		this.detailedurl = detailedurl;
 	}
-
-	public String getInfo() {
-		return this.info;
-	}
-
-	public void setInfo(String info) {
-		this.info = info;
-	}
-
-	public BigDecimal getMarketPrice() {
-		return this.marketPrice;
-	}
-
-	public void setMarketPrice(BigDecimal marketPrice) {
-		this.marketPrice = marketPrice;
-	}
-
-	public int getMinNum() {
-		return this.minNum;
-	}
-
-	public void setMinNum(int minNum) {
-		this.minNum = minNum;
-	}
-
-	public BigDecimal getRetailPrice() {
-		return this.retailPrice;
-	}
-
-	public void setRetailPrice(BigDecimal retailPrice) {
-		this.retailPrice = retailPrice;
-	}
-
-	public int getSecondtypeId() {
-		return this.secondtypeId;
-	}
-
-	public void setSecondtypeId(int secondtypeId) {
-		this.secondtypeId = secondtypeId;
-	}
-
-	public String getShelfLife() {
-		return this.shelfLife;
-	}
-
-	public void setShelfLife(String shelfLife) {
-		this.shelfLife = shelfLife;
-	}
-
-	public int getStoreId() {
-		return this.storeId;
-	}
-
-	public void setStoreId(int storeId) {
-		this.storeId = storeId;
-	}
-
 	public String getUnit() {
-		return this.unit;
+		return unit;
 	}
-
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
-
-	public BigDecimal getWholesalePrice() {
-		return this.wholesalePrice;
+	public Integer getMinNum() {
+		return minNum;
 	}
-
-	public void setWholesalePrice(BigDecimal wholesalePrice) {
+	public void setMinNum(Integer minNum) {
+		this.minNum = minNum;
+	}
+	public String getShelfLife() {
+		return shelfLife;
+	}
+	public void setShelfLife(String shelfLife) {
+		this.shelfLife = shelfLife;
+	}
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	public Integer getSecondtypeId() {
+		return secondtypeId;
+	}
+	public void setSecondtypeId(Integer secondtypeId) {
+		this.secondtypeId = secondtypeId;
+	}
+	public Integer getImported() {
+		return imported;
+	}
+	public void setImported(Integer imported) {
+		this.imported = imported;
+	}
+	public String getInfo() {
+		return info;
+	}
+	public void setInfo(String info) {
+		this.info = info;
+	}
+	public Integer getFirsttypeId() {
+		return firsttypeId;
+	}
+	public void setFirsttypeId(Integer firsttypeId) {
+		this.firsttypeId = firsttypeId;
+	}
+	public Integer getStoreId() {
+		return storeId;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	public Integer getStock() {
+		return stock;
+	}
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
+	public Integer getIsShelf() {
+		return isShelf;
+	}
+	public void setIsShelf(Integer isShelf) {
+		this.isShelf = isShelf;
+	}
+	public Commodity(Integer id, String goodsName, float wholesalePrice, float retailPrice, float marketPrice,
+			String image, String detailedurl, String unit, Integer minNum, String shelfLife, String brand,
+			Integer secondtypeId, Integer imported, String info, Integer firsttypeId, Integer storeId, Integer stock,
+			Integer isShelf) {
+		this.id = id;
+		this.goodsName = goodsName;
 		this.wholesalePrice = wholesalePrice;
+		this.retailPrice = retailPrice;
+		this.marketPrice = marketPrice;
+		this.image = image;
+		this.detailedurl = detailedurl;
+		this.unit = unit;
+		this.minNum = minNum;
+		this.shelfLife = shelfLife;
+		this.brand = brand;
+		this.secondtypeId = secondtypeId;
+		this.imported = imported;
+		this.info = info;
+		this.firsttypeId = firsttypeId;
+		this.storeId = storeId;
+		this.stock = stock;
+		this.isShelf = isShelf;
 	}
+	public Commodity() {
+		// TODO 自动生成的构造函数存根
+	}
+	
+	
+	
 
 }
