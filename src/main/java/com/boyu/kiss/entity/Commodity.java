@@ -2,11 +2,9 @@ package com.boyu.kiss.entity;
 
 import java.io.Serializable;
 
-import com.alibaba.druid.pool.ha.selector.RandomDataSourceValidateThread;
-import com.baomidou.mybatisplus.annotations.TableId;
 
+import com.baomidou.mybatisplus.annotations.TableId;
 import java.math.BigDecimal;
-import java.security.interfaces.RSAMultiPrimePrivateCrtKey;
 
 
 /**
@@ -22,23 +20,72 @@ public class Commodity implements Serializable {
 	
 	@TableId
 	private Integer id;
+	
 	private String goodsName;
-	private float wholesalePrice;
-	private float retailPrice;
-	private float marketPrice;
+	
+	private BigDecimal wholesalePrice;
+	
+	private BigDecimal retailPrice;
+	
+	private BigDecimal marketPrice;
+	
 	private String image;
+	
 	private String detailedurl;
+
 	private String unit;
+	
 	private Integer minNum;
+
 	private String 	shelfLife;
+	
 	private String brand;
+	
 	private Integer secondtypeId;
+	
 	private Integer imported;
+	
 	private String info;
+
 	private Integer firsttypeId;
+	
 	private Integer storeId;
-	private Integer stock;
-	private Integer isShelf;
+
+	private Integer stocks;
+
+	private Integer isShelfs;
+	
+	
+	public BigDecimal getWholesalePrice() {
+		return wholesalePrice;
+	}
+	public void setWholesalePrice(BigDecimal wholesalePrice) {
+		this.wholesalePrice = wholesalePrice;
+	}
+	public BigDecimal getRetailPrice() {
+		return retailPrice;
+	}
+	public void setRetailPrice(BigDecimal retailPrice) {
+		this.retailPrice = retailPrice;
+	}
+	public BigDecimal getMarketPrice() {
+		return marketPrice;
+	}
+	public void setMarketPrice(BigDecimal marketPrice) {
+		this.marketPrice = marketPrice;
+	}
+	public Integer getStocks() {
+		return stocks;
+	}
+	public void setStocks(Integer stocks) {
+		this.stocks = stocks;
+	}
+	public Integer getIsShelfs() {
+		return isShelfs;
+	}
+	public void setIsShelfs(Integer isShelfs) {
+		this.isShelfs = isShelfs;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -51,23 +98,9 @@ public class Commodity implements Serializable {
 	public void setGoodsName(String goodsName) {
 		this.goodsName = goodsName;
 	}
-	public float getWholesalePrice() {
-		return wholesalePrice;
-	}
-	public void setWholesalePrice(float wholesalePrice) {
-		this.wholesalePrice = wholesalePrice;
-	}
-	public float getRetailPrice() {
-		return retailPrice;
-	}
-	public void setRetailPrice(float retailPrice) {
-		this.retailPrice = retailPrice;
-	}
-	public float getMarketPrice() {
-		return marketPrice;
-	}
-	public void setMarketPrice(float marketPrice) {
-		this.marketPrice = marketPrice;
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	public String getImage() {
 		return image;
@@ -135,41 +168,7 @@ public class Commodity implements Serializable {
 	public void setStoreId(Integer storeId) {
 		this.storeId = storeId;
 	}
-	public Integer getStock() {
-		return stock;
-	}
-	public void setStock(Integer stock) {
-		this.stock = stock;
-	}
-	public Integer getIsShelf() {
-		return isShelf;
-	}
-	public void setIsShelf(Integer isShelf) {
-		this.isShelf = isShelf;
-	}
-	public Commodity(Integer id, String goodsName, float wholesalePrice, float retailPrice, float marketPrice,
-			String image, String detailedurl, String unit, Integer minNum, String shelfLife, String brand,
-			Integer secondtypeId, Integer imported, String info, Integer firsttypeId, Integer storeId, Integer stock,
-			Integer isShelf) {
-		this.id = id;
-		this.goodsName = goodsName;
-		this.wholesalePrice = wholesalePrice;
-		this.retailPrice = retailPrice;
-		this.marketPrice = marketPrice;
-		this.image = image;
-		this.detailedurl = detailedurl;
-		this.unit = unit;
-		this.minNum = minNum;
-		this.shelfLife = shelfLife;
-		this.brand = brand;
-		this.secondtypeId = secondtypeId;
-		this.imported = imported;
-		this.info = info;
-		this.firsttypeId = firsttypeId;
-		this.storeId = storeId;
-		this.stock = stock;
-		this.isShelf = isShelf;
-	}
+	
 	public Commodity() {
 		// TODO 自动生成的构造函数存根
 	}
