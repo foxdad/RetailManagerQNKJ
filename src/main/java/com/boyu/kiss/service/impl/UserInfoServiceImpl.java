@@ -1,7 +1,5 @@
 package com.boyu.kiss.service.impl;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.boyu.kiss.entity.UserInfo;
