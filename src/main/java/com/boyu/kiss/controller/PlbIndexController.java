@@ -65,9 +65,18 @@ public class PlbIndexController {
 						.eq("yxbj", 1)
 						.last("LIMIT 0,6")
 						);
+		List<Map<String, Object>> aclMaps3 =
+				adImpl.selectMaps(new EntityWrapper<ActivityDetail>()
+						.setSqlSelect("activityId,ImgURL")
+						.eq("marketid", marketid)
+						.eq("activityId", 3)
+						.eq("yxbj", 1)
+						.last("LIMIT 0,4")
+						);
 		smap.put("type", tlMaps);		//活动类型数据	
 		smap.put("data1", aclMaps1);  //活动主题类型1的数据
 		smap.put("data2", aclMaps2);  //活动主题类型2的数据
+		smap.put("data3", aclMaps3);  //活动主题类型3的数据(4张活动图片)
 		resultMap.put("Activity",smap);
 		
 		
