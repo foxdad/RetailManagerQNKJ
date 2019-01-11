@@ -4,6 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
+    #192.168.43.49
     url: jdbc:mysql://192.168.43.49:3306/app_plb?characterEncoding=UTF-8
     username: root
     password: root

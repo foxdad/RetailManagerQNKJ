@@ -8,5 +8,7 @@ import com.boyu.kiss.result.ShopcartResults;
 
 public interface ShopcartMapper extends BaseMapper<Shopcart>{
 
-	public List<ShopcartResults> getShopcartByUserId(int userId);
+	public List<ShopcartResults> getRetailShopcartByUserId(int userId);
+	
+	public List<ShopcartResults> getWholesalersShopcartByUserId(int userId);
 }

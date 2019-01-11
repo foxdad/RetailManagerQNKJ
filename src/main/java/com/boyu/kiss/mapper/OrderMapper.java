@@ -9,4 +9,6 @@ import com.boyu.kiss.entity.OrderVO;
 public interface OrderMapper extends BaseMapper<Order>{
 
 	public List<OrderVO> getOrderByUserId(int userId);
+	
+	public List<OrderVO> getOrderByStoreId(int storeId);
 }

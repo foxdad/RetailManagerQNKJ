@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotations.TableId;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -38,14 +39,28 @@ public class OrderVO implements Serializable {
 
 	private int userId;
 
-	private Orderitem orderitem;
+	private int storeId;
+	private List<OrderitemVO> orderitemVO;
 	
-	public Orderitem getOrderitem() {
-		return orderitem;
+	
+	public int getStoreId() {
+		return storeId;
 	}
 
-	public void setOrderitem(Orderitem orderitem) {
-		this.orderitem = orderitem;
+	public void setStoreId(int storeId) {
+		this.storeId = storeId;
+	}
+
+	public List<OrderitemVO> getOrderitemVO() {
+		return orderitemVO;
+	}
+
+	public void setOrderitemVO(List<OrderitemVO> orderitemVO) {
+		this.orderitemVO = orderitemVO;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public OrderVO() {

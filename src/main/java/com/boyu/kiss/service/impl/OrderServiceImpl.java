@@ -19,4 +19,8 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderMapper,Order> impleme
 		List<OrderVO> list = orderMapper.getOrderByUserId(userId);
 		return list;
 	}
+	public List<OrderVO> getOrderByStoreId(int storeId){
+		List<OrderVO> list = orderMapper.getOrderByStoreId(storeId);
+		return list;
+	}
 }

@@ -1,5 +1,7 @@
 package com.boyu.kiss.service;
 
-public interface IStoreService{
+import com.boyu.kiss.entity.Store;
+
+public interface IStoreService extends IBaseService<Store>{
 
 }

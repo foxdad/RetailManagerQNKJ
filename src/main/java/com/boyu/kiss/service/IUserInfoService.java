@@ -1,5 +1,7 @@
 package com.boyu.kiss.service;
 
-public interface IUserInfoService {
+import com.boyu.kiss.entity.UserInfo;
+
+public interface IUserInfoService extends IBaseService<UserInfo>{
 
 }

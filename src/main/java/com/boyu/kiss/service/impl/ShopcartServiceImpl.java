@@ -17,8 +17,13 @@ public class ShopcartServiceImpl extends BaseServiceImpl<ShopcartMapper,Shopcart
 	@Autowired
 	private ShopcartMapper shopcartMapper;
 	
-	public List<ShopcartResults> getShopcartByUserId(int userId){
-		List<ShopcartResults> list = shopcartMapper.getShopcartByUserId(userId);
+	public List<ShopcartResults> getRetailShopcartByUserId(int userId){
+		List<ShopcartResults> list = shopcartMapper.getRetailShopcartByUserId(userId);
+		return list;
+	}
+	
+	public List<ShopcartResults> getWholesalersShopcartByUserId(int userId){
+		List<ShopcartResults> list = shopcartMapper.getWholesalersShopcartByUserId(userId);
 		return list;
 	}
 }

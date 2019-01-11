@@ -19,24 +19,38 @@
 		<result column="phone" property="phone"/>
 		<result column="state" property="state"/>
 		<result column="userId" property="userId"/>
+		<result column="storeId" property="storeId"/>
 		<!-- 
 		collection定义关联结合类型的属性的封装规则
 		ofType：指定集合里面元素的类型
 		-->
-		<collection property="orderitem" ofType="com.boyu.kiss.entity.OrderVO">
+		<collection property="orderitemVO" ofType="com.boyu.kiss.entity.OrderitemVO">
 			<!-- 定义这个集合中元素的封装规则 -->
-			<id column="id" property="id"/>
-			<result column="goodsId" property="goodsId"/>
+			<id column="orderitemId" property="orderitemId"/>
+			<result column="commodityid" property="commodityid"/>
 			<result column="number" property="number"/>
 			<result column="subtotal" property="subtotal"/>
+			<result column="goodsName" property="goodsName"/>
+			<result column="Image" property="Image"/>
+			<result column="unit" property="unit"/>
+			<result column="info" property="info"/>
 		</collection>
 	
 	</resultMap>
 	
 	<!-- public Department getDeptByIdPlus(Integer id); -->
 	<select id="getOrderByUserId" resultMap="getOrderitemResultMap" >
-		SELECT *,i.id,i.goodsId,i.number,i.subtotal,i.storeId 
-		FROM t_order o,t_orderitem i WHERE o.id = i.orderId and userId = #{userId}
+		<!-- SELECT o.*,i.id,i.goodsId,i.number,i.subtotal,i.storeId 
+		FROM t_order o,t_orderitem i WHERE o.id = i.orderId and userId = #{userId} -->
+		SELECT c.id AS commodityid,c.goodsName,c.Image,c.unit,c.info,o.*,
+		i.id AS orderitemId,i.number,i.subtotal,i.storeId 
+		FROM t_order o,t_orderitem i,t_commodity c 
+		WHERE o.id = i.orderId AND i.goodsId = c.id AND userId = #{userId}
 	</select>
-
+	<select id="getOrderByStoreId" resultMap="getOrderitemResultMap" >
+		SELECT c.id AS commodityid,c.goodsName,c.Image,c.unit,c.info,o.*,
+		i.id AS orderitemId,i.number,i.subtotal,i.storeId 
+		FROM t_order o,t_orderitem i,t_commodity c 
+		WHERE o.id = i.orderId AND i.goodsId = c.id AND i.storeId = #{storeId}
+	</select>
 </mapper>

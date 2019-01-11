@@ -1,5 +1,6 @@
 package com.boyu.kiss.service;
 
+import java.util.Map;
 
 /**
  * 
@@ -8,4 +9,5 @@ package com.boyu.kiss.service;
  */
 public interface IUserService{
 
+	public Map<String, Object> login(String username, String password, int roleId);
 }
