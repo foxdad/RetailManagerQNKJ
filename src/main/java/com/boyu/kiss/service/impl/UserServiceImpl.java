@@ -13,10 +13,6 @@ import com.boyu.kiss.entity.User;
 import com.boyu.kiss.entity.UserInfo;
 import com.boyu.kiss.mapper.UserMapper;
 import com.boyu.kiss.result.ShopcartResults;
-import com.boyu.kiss.service.IOrderService;
-import com.boyu.kiss.service.IShopcartService;
-import com.boyu.kiss.service.IStoreService;
-import com.boyu.kiss.service.IUserInfoService;
 import com.boyu.kiss.service.IUserService;
 
 /**
@@ -30,13 +26,13 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper,User> implements
 	@Autowired
 	private UserMapper userMapper;
 	@Autowired
-	private IUserInfoService userInfoService;
+	private UserInfoServiceImpl userInfoService;
 	@Autowired
-	private IStoreService storeService;
+	private StoreServiceImpl storeService;
 	@Autowired
-	private IOrderService orderService;
+	private OrderServiceImpl orderService;
 	@Autowired
-	private IShopcartService shopcartService;
+	private ShopcartServiceImpl shopcartService;
 	public Map<String, Object> login(String username, String password, int roleId) {
 		
 		List<User> list = null;
