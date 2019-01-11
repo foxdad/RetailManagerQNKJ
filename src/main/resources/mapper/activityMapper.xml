@@ -4,10 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.boyu.kiss.mapper.ActivityMapper">
+	<!--自定义特殊活动查询结果集 -->
+	<resultMap type="ActivityDetail" id="acMap">
+		<id column="id" property="id"/>
+		<result column="activity_item_Name" property="activity_item_Name"/>
+		<result column="introduce" property="introduce"/>
+		<result column="ImgURL" property="ImgURL"/>
+		<association property="activityType" javaType="ActivityType">
+			<result column="activity_theme" property="activityTheme"/>
+		</association>
+	</resultMap>
 	<!-- 查询指定个数活动首页广告 -->
 	<select id="getAdList" resultType="Advertisement">
-		select 
-		*
+		select *
 		from t_advertisement
 		<where>
 			<if test="marketid != null">
@@ -19,8 +28,11 @@
 		</if>
 	</select>
 	<!-- 查询指定个数特价或热销商品 -->
-	<select id="getAcList" resultType="ActivityDetail">
-		select * from t_activitydetails
+	<select id="getAcList" resultMap="acMap">
+		select a.id, b.activity_theme,
+		a.activity_item_Name, a.introduce, a.ImgURL
+		from 
+		t_activitydetails a,t_activitytype b
 		<where>
 			<if test="marketid != null">
 				marketid = #{marketid}

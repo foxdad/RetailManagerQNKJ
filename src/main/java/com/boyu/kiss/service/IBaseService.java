@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.baomidou.mybatisplus.mapper.Wrapper;
 
 /**
@@ -79,7 +81,7 @@ public interface IBaseService<T> {
      */
     T selectById(Serializable id);
     
-    
+   
     /**
      * <p>
      * 查询（根据 columnMap 条件）

@@ -23,7 +23,11 @@ public class ActivityDetail implements Serializable {
 	private String pageURL;
 	
 	private Integer marketid;
-
+	
+	private ActivityType activityType;
+	
+	private Integer yxbj;
+	
 	public Integer getMarketid() {
 		return marketid;
 	}
@@ -81,6 +85,22 @@ public class ActivityDetail implements Serializable {
 
 	public void setPageURL(String pageURL) {
 		this.pageURL = pageURL;
+	}
+
+	public ActivityType getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(ActivityType activityType) {
+		this.activityType = activityType;
+	}
+
+	public Integer getYxbj() {
+		return yxbj;
+	}
+
+	public void setYxbj(Integer yxbj) {
+		this.yxbj = yxbj;
 	}
 
 }
