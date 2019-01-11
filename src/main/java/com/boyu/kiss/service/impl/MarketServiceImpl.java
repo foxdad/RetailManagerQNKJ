@@ -7,6 +7,6 @@ import com.boyu.kiss.mapper.MarketMapper;
 import com.boyu.kiss.service.IMarketService;
 
 @Service
-public class MarketServiceImpl extends BaseServiceImpl<MarketMapper, Market> implements IMarketService<Market>{
+public class MarketServiceImpl extends BaseServiceImpl<MarketMapper, Market> implements IMarketService{
 	
 }
