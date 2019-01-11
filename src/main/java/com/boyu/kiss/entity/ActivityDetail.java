@@ -16,7 +16,7 @@ public class ActivityDetail implements Serializable {
 
 	private int activityId;
 
-	private String imgURL;
+	private String ImgURL;
 
 	private String introduce;
 
@@ -64,11 +64,11 @@ public class ActivityDetail implements Serializable {
 	}
 
 	public String getImgURL() {
-		return this.imgURL;
+		return ImgURL;
 	}
 
 	public void setImgURL(String imgURL) {
-		this.imgURL = imgURL;
+		ImgURL = imgURL;
 	}
 
 	public String getIntroduce() {
