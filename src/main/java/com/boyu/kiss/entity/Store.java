@@ -45,7 +45,11 @@ public class Store implements Serializable {
 	private String yxzsUrl;
 
 	private String yyxkz;
-
+	
+	private String logoUrl;
+	
+	private String slogan;
+	
 	public Store() {
 	}
 
@@ -185,4 +189,21 @@ public class Store implements Serializable {
 		this.yyxkz = yyxkz;
 	}
 
+	public String getLogoUrl() {
+		return logoUrl;
+	}
+
+	public void setLogoUrl(String logoUrl) {
+		this.logoUrl = logoUrl;
+	}
+
+	public String getSlogan() {
+		return slogan;
+	}
+
+	public void setSlogan(String slogan) {
+		this.slogan = slogan;
+	}
+	
+	
 }
