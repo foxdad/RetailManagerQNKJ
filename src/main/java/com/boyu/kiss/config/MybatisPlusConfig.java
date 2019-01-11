@@ -11,7 +11,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
 
 @Configuration
-@MapperScan("com.boyu.kiss.mapper")
+@MapperScan("com.boyu.kiss.mapper") 
 public class MybatisPlusConfig {
 	
 	/**

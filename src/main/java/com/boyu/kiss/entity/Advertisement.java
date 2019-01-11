@@ -19,6 +19,8 @@ public class Advertisement implements Serializable {
 	
 	private Integer marketid;
 	
+	private Integer yxbj;
+	
 	public Integer getMarketid() {
 		return marketid;
 	}
@@ -62,4 +64,12 @@ public class Advertisement implements Serializable {
 		this.pageURL = pageURL;
 	}
 
+	public Integer getYxbj() {
+		return yxbj;
+	}
+
+	public void setYxbj(Integer yxbj) {
+		this.yxbj = yxbj;
+	}
+	
 }
