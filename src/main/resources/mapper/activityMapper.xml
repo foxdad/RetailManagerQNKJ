@@ -32,13 +32,13 @@
 		select a.id, b.activity_theme,
 		a.activity_item_Name, a.introduce, a.ImgURL
 		from 
-		t_activitydetails a,t_activitytype b
+		t_activitydetail a,t_activitytype b
 		<where>
 			<if test="marketid != null">
-				marketid = #{marketid}
+			and	marketid = #{marketid}
 			</if>
 			<if test="activityid != null">
-				activityid = #{activityid}
+			and	activityid = #{activityid}
 			</if>
 		</where>
 		<if test="total != null and total != 0">

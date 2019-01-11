@@ -1,5 +1,7 @@
 package com.boyu.kiss.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,10 +15,13 @@ import com.boyu.kiss.entity.ActivityDetail;
 import com.boyu.kiss.entity.ActivityType;
 import com.boyu.kiss.entity.Advertisement;
 import com.boyu.kiss.entity.Market;
+import com.boyu.kiss.entity.Store;
 import com.boyu.kiss.service.impl.ActivitydetailServiceImpl;
 import com.boyu.kiss.service.impl.ActivitytypeServiceImpl;
 import com.boyu.kiss.service.impl.AdvertisementServiceImpl;
 import com.boyu.kiss.service.impl.MarketServiceImpl;
+import com.boyu.kiss.service.impl.StoreOrderCountServiceImpl;
+import com.boyu.kiss.service.impl.StoreServiceImpl;
 
 @RestController
 public class PlbIndexController {
@@ -29,6 +34,10 @@ public class PlbIndexController {
 	private ActivitytypeServiceImpl acImpl;
 	@Autowired
 	private ActivitydetailServiceImpl adImpl;
+	@Autowired
+	private StoreOrderCountServiceImpl soImpl;
+	@Autowired
+	private StoreServiceImpl stImpl;
 
 	@RequestMapping(value="/appIndex")
 	public Map<String, Object> index(String market){
@@ -78,6 +87,17 @@ public class PlbIndexController {
 		smap.put("data2", aclMaps2);  //活动主题类型2的数据
 		smap.put("data3", aclMaps3);  //活动主题类型3的数据(4张活动图片)
 		resultMap.put("Activity",smap);
+		
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+        String time = df.format(new Date());
+        String newtime = time.substring(0, 7); //获取指定格式日期
+        List<Integer> iList = soImpl.gOrderCounts(marketid, newtime, 3);//获取每月前三销量店铺id
+		List<Map<String, Object>> storeMap =
+				stImpl.selectMaps(new EntityWrapper<Store>()
+						.setSqlSelect("storeId,storeName,openTime,closeTime,logoUrl,slogan")
+						.in("storeId", iList)
+						);
+		resultMap.put("Recommendedshop",storeMap);
 		
 		
 		return resultMap;
