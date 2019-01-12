@@ -14,12 +14,16 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.boyu.kiss.entity.ActivityDetail;
 import com.boyu.kiss.entity.ActivityType;
 import com.boyu.kiss.entity.Advertisement;
+import com.boyu.kiss.entity.Commodity;
 import com.boyu.kiss.entity.Market;
 import com.boyu.kiss.entity.Store;
+import com.boyu.kiss.entity.StoreCommodityCount;
 import com.boyu.kiss.service.impl.ActivitydetailServiceImpl;
 import com.boyu.kiss.service.impl.ActivitytypeServiceImpl;
 import com.boyu.kiss.service.impl.AdvertisementServiceImpl;
+import com.boyu.kiss.service.impl.CommodityServiceImpl;
 import com.boyu.kiss.service.impl.MarketServiceImpl;
+import com.boyu.kiss.service.impl.StoreCommodityCountServiceImpl;
 import com.boyu.kiss.service.impl.StoreOrderCountServiceImpl;
 import com.boyu.kiss.service.impl.StoreServiceImpl;
 
@@ -37,8 +41,17 @@ public class PlbIndexController {
 	@Autowired
 	private StoreOrderCountServiceImpl soImpl;
 	@Autowired
+	private StoreCommodityCountServiceImpl scImpl;
+	@Autowired
 	private StoreServiceImpl stImpl;
-
+	@Autowired
+	private CommodityServiceImpl cImpl;
+	
+	/**
+	 * 商家版首页接口
+	 * @param market 传入市场名字
+	 * @return
+	 */
 	@RequestMapping(value="/appIndex")
 	public Map<String, Object> index(String market){
 		Map<String,Object> resultMap = new HashMap<>(); //放回结果集
@@ -88,6 +101,7 @@ public class PlbIndexController {
 		smap.put("data3", aclMaps3);  //活动主题类型3的数据(4张活动图片)
 		resultMap.put("Activity",smap);
 		
+		Map<String, Object> shopmap = new HashMap<>();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
         String time = df.format(new Date());
         String newtime = time.substring(0, 7); //获取指定格式日期
@@ -97,9 +111,18 @@ public class PlbIndexController {
 						.setSqlSelect("storeId,storeName,openTime,closeTime,logoUrl,slogan")
 						.in("storeId", iList)
 						);
-		resultMap.put("Recommendedshop",storeMap);
-		
-		
+		List<Integer> cids = scImpl.getIdList(iList.get(0), newtime, 4);
+		cids.addAll(scImpl.getIdList(iList.get(1), newtime, 4));
+		cids.addAll(scImpl.getIdList(iList.get(2), newtime, 4)); //获取店铺排行前4的商品id
+		//获取店铺推荐商品信息
+		List<Map<String, Object>> cMaps =
+		cImpl.selectMaps(new EntityWrapper<Commodity>()
+				.setSqlSelect("id,Image,wholesalePrice,storeId")
+				.in("id", cids)
+				);
+		shopmap.put("store",storeMap);
+		shopmap.put("commodity", cMaps);
+		resultMap.put("Recommendedshop",shopmap);
 		return resultMap;
 	}
 }
