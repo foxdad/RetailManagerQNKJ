@@ -125,4 +125,28 @@ public class PlbIndexController {
 		resultMap.put("Recommendedshop",shopmap);
 		return resultMap;
 	}
+	
+	/**
+	 * 获取更多活动信息
+	 * @param market 传入市场名
+	 * @param activityId 传入活动类型id
+	 * @return
+	 */
+	@RequestMapping(value="/moreActivity")
+	public Map<String, Object> queryActivity(String market,Integer activityId){
+		Map<String,Object> resultMap = new HashMap<>(); //放回结果集
+		Map<String, Object> map = new HashMap<>();
+		map.put("marketName", market);
+		List<Market> markets = mImpl.selectByMap(map);
+		Integer marketid = markets.get(0).getId(); //根据市场名获取市场id
+		List<Map<String, Object>> aclMaps1 =
+				adImpl.selectMaps(new EntityWrapper<ActivityDetail>()
+						.setSqlSelect("activityId,activity_item_Name,introduce,ImgURL")
+						.eq("marketid", marketid)
+						.eq("activityId", activityId)
+						.eq("yxbj", 1)
+						);
+		resultMap.put("activity", aclMaps1);
+		return resultMap;		
+	}
 }
