@@ -14,18 +14,21 @@ import org.apache.commons.codec.Decoder;
 import org.apache.commons.codec.StringDecoder;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.tomcat.util.bcel.classfile.Constant;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boyu.kiss.entity.Commodity;
 import com.boyu.kiss.service.impl.CommodityServiceImpl;
 
-@RestController
+@Controller
 public class CommodityController {
 
 	@Autowired
 	private CommodityServiceImpl commodityService;
+
 	//添加商品接口
 	/*@RequestMapping("/addCommodity.do")
 	public String addCommodity(Commodity commodity,HttpServletRequest request) {
@@ -61,12 +64,18 @@ public class CommodityController {
         {
         	return "{\"result\": \"failed\"}";
         }
+	
+	@ResponseBody
+	@RequestMapping("/addCommodity")
+	public String addCommodity(Commodity commodity) {
+
 		Integer rows = commodityService.insert(commodity);
 		if(rows == 1)
 			return "{\"result\": \"OK\"}";
 		else {
 			return "{\"result\": \"failed\"}";
 		}
+
 	}*/
 	/*@RequestMapping("/test")
 	public String addCommodity(String str,HttpServletRequest request) {
@@ -144,5 +153,6 @@ public class CommodityController {
 				return "{\"result\": \"OK\"}";
 		
 		return "{\"result\": \"failed\"}";
+
 	}
 }
