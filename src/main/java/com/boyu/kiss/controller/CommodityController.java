@@ -77,7 +77,8 @@ public class CommodityController {
 		}
 
 	}*/
-	/*@RequestMapping("/test")
+	@ResponseBody
+	@RequestMapping("/test")
 	public String addCommodity(String str,HttpServletRequest request) {
 		//对字节数组字符串进行Base64解码并生成图片
         if (str == null) //图像数据为空
@@ -86,7 +87,9 @@ public class CommodityController {
         try 
         {
             //Base64解码
-        	byte[] b = Base64.decodeBase64(str);
+        	String imgs = str.replaceAll("data:image/jpeg;base64,", "");
+        	System.out.println(imgs);
+        	byte[] b = Base64.decodeBase64(imgs);
             for(int i=0;i<b.length;++i)
             {
                 if(b[i]<0)
@@ -99,7 +102,7 @@ public class CommodityController {
                     .format(new Date())
                     + (new Random().nextInt(9000) % (9000 - 1000 + 1) + 1000)
                     + ".jpg";
-            String path = request.getServletPath()+"/static/images/commodity"+files;
+            String path = request.getServletContext().getRealPath("\\")+"\\static\\images\\commodity\\"+files;
             System.out.println(path);
             OutputStream out = new FileOutputStream(path);    
             out.write(b);
@@ -112,13 +115,7 @@ public class CommodityController {
         	return "{\"result\": \"failed\"}";
         }
         return "{\"result\": \"OK\"}";
-		Integer rows = commodityService.insert(commodity);
-		if(rows == 1)
-			return "{\"result\": \"OK\"}";
-		else {
-			return "{\"result\": \"failed\"}";
-		}
-	}*/
+	}
 	//商品上下架接口
 	@RequestMapping("/commodityUpAndDown.do")
 	public String commodityUpAndDown(int commodityId,int action) {
