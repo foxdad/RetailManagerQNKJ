@@ -16,6 +16,7 @@ import com.boyu.kiss.entity.ActivityType;
 import com.boyu.kiss.entity.Advertisement;
 import com.boyu.kiss.entity.Commodity;
 import com.boyu.kiss.entity.Market;
+import com.boyu.kiss.entity.MarketVo;
 import com.boyu.kiss.entity.Store;
 import com.boyu.kiss.entity.StoreCommodityCount;
 import com.boyu.kiss.service.impl.ActivitydetailServiceImpl;
@@ -54,7 +55,7 @@ public class PlbIndexController {
 	 */
 	@RequestMapping(value="/appIndex")
 	public Map<String, Object> index(String market){
-		Map<String,Object> resultMap = new HashMap<>(); //放回结果集
+		Map<String,Object> resultMap = new HashMap<>(); //返回结果集
 		Map<String, Object> map = new HashMap<>();
 		map.put("marketName", market);
 		List<Market> markets = mImpl.selectByMap(map);
@@ -119,10 +120,13 @@ public class PlbIndexController {
 		cImpl.selectMaps(new EntityWrapper<Commodity>()
 				.setSqlSelect("id,Image,wholesalePrice,storeId")
 				.in("id", cids)
-				);
-		shopmap.put("store",storeMap);
-		shopmap.put("commodity", cMaps);
+				);	
+		shopmap.put("store",storeMap);					//推荐店铺信息
+		shopmap.put("commodity", cMaps);				//推荐店铺商品信息
 		resultMap.put("Recommendedshop",shopmap);
+		
+		List<MarketVo> mVos = mImpl.getMarkets();		
+		resultMap.put("market", mVos);                 //市场信息
 		return resultMap;
 	}
 	
@@ -146,7 +150,11 @@ public class PlbIndexController {
 						.eq("activityId", activityId)
 						.eq("yxbj", 1)
 						);
-		resultMap.put("activity", aclMaps1);
+		if (aclMaps1 != null && aclMaps1.size() != 0) {
+			resultMap.put("activity", aclMaps1);
+		}else{
+			resultMap.put("result", "failed");
+		}
 		return resultMap;		
 	}
 }

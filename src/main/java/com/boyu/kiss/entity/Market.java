@@ -24,7 +24,11 @@ public class Market implements Serializable {
 	private String marketName;
 
 	private String province;
-
+	
+	private Double longitude;
+	
+	private Double latitude;
+	
 	public Market() {
 	}
 
@@ -76,4 +80,20 @@ public class Market implements Serializable {
 		this.province = province;
 	}
 
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+	
 }
