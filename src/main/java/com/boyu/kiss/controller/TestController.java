@@ -8,15 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.boyu.kiss.entity.ActivityDetail;
 import com.boyu.kiss.mapper.ActivityMapper;
+import com.boyu.kiss.service.impl.UserServiceImpl;
 
 @RestController
 public class TestController {
 	
 	@Autowired
-	private ActivityMapper aMapper;
+	private UserServiceImpl uImpl;
 	
-	@RequestMapping(value="/Test")
-	public List<ActivityDetail> getlist(){		
-		return aMapper.getAcList(1, 1, 6);		
-	}
 }
