@@ -3,17 +3,13 @@ package com.boyu.kiss.controller;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
-import org.apache.commons.codec.Decoder;
-import org.apache.commons.codec.StringDecoder;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.tomcat.util.bcel.classfile.Constant;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,42 +26,24 @@ public class CommodityController {
 	private CommodityServiceImpl commodityService;
 
 	//添加商品接口
-	/*@RequestMapping("/addCommodity.do")
+	@RequestMapping("/addCommodity.do")
 	public String addCommodity(Commodity commodity,HttpServletRequest request) {
 		//对字节数组字符串进行Base64解码并生成图片
-        if (commodity.getImage() == null) //图像数据为空
-        	return "{\"result\": \"failed\"}";
-      
-        try 
-        {
-            //Base64解码
-        	byte[] b = Base64.decodeBase64(commodity.getImage());
-            for(int i=0;i<b.length;++i)
-            {
-                if(b[i]<0)
-                {//调整异常数据
-                    b[i]+=256;
-                }
-            }
-            //生成jpeg图片
-            String files = new SimpleDateFormat("yyyyMMddHHmmssSSS")
-                    .format(new Date())
-                    + (new Random().nextInt(9000) % (9000 - 1000 + 1) + 1000)
-                    + ".jpg";
-            String path = request.getServletPath()+"/static/images/commodity"+files;
-            System.out.println(path);
-            OutputStream out = new FileOutputStream(path);    
-            out.write(b);
-            out.flush();
-            out.close();
-           
-        } 
-        catch (Exception e) 
-        {
-        	return "{\"result\": \"failed\"}";
-        }
-	
-	@ResponseBody
+		String commodityImg = upImgs(commodity.getImage(),"commodity",request);
+		String detailedImg = upImgs(commodity.getDetailedurl(),"commodity",request);
+		if(commodityImg!=null&&detailedImg!=null) {
+			commodity.setImage(commodityImg);
+			commodity.setDetailedurl(detailedImg);
+			Integer rows = commodityService.insert(commodity);
+			if(rows == 1)
+				return "{\"result\": \"OK\"}";
+			else {
+				return "{\"result\": \"failed\"}";
+			}
+		}
+		return "{\"result\": \"failed\"}";
+	}
+	/*@ResponseBody
 	@RequestMapping("/addCommodity")
 	public String addCommodity(Commodity commodity) {
 
@@ -115,6 +93,44 @@ public class CommodityController {
         	return "{\"result\": \"failed\"}";
         }
         return "{\"result\": \"OK\"}";
+	}
+	public static String upImgs(String strbase64,String path,HttpServletRequest request) {
+		//对字节数组字符串进行Base64解码并生成图片
+        if (strbase64 == null) //图像数据为空
+        	return null;
+      
+        try 
+        {
+            //Base64解码
+        	String imgs = strbase64.replaceAll("data:image/jpeg;base64,", "");
+        	byte[] b = Base64.decodeBase64(imgs);
+            for(int i=0;i<b.length;++i)
+            {
+                if(b[i]<0)
+                {//调整异常数据
+                    b[i]+=256;
+                }
+            }
+            //生成jpeg图片
+            String files = new SimpleDateFormat("yyyyMMddHHmmssSSS")
+                    .format(new Date())
+                    + (new Random().nextInt(9000) % (9000 - 1000 + 1) + 1000)
+                    + ".jpg";
+            //存服务器的相对路径
+            String file = "\\static\\images\\"+path+"\\"+path+files;
+            String filepath = request.getServletContext().getRealPath("\\")+file;
+            System.out.println(path);
+            OutputStream out = new FileOutputStream(filepath);    
+            out.write(b);
+            out.flush();
+            out.close();
+            return file;
+        } 
+        catch (Exception e) 
+        {
+        	return null;
+        }
+        
 	}
 	//商品上下架接口
 	@RequestMapping("/commodityUpAndDown.do")
