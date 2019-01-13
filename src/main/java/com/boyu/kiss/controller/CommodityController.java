@@ -6,7 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
@@ -21,13 +23,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boyu.kiss.entity.Commodity;
+import com.boyu.kiss.result.CommodityTypeVo;
 import com.boyu.kiss.service.impl.CommodityServiceImpl;
+import com.boyu.kiss.service.impl.CommodityTypeServiceImpl;
 
 @Controller
 public class CommodityController {
 
 	@Autowired
 	private CommodityServiceImpl commodityService;
+	@Autowired
+	private CommodityTypeServiceImpl ctImpl;
 
 	//添加商品接口
 	/*@RequestMapping("/addCommodity.do")
@@ -152,4 +158,18 @@ public class CommodityController {
 		return "{\"result\": \"failed\"}";
 
 	}
+	
+	@RequestMapping(value="/selectComodityType")
+	@ResponseBody
+	public Map<String, Object> selectCommodityType(String market,String storeName){
+		Map<String,Object> resultMap = new HashMap<>(); //返回结果集
+		List<CommodityTypeVo> cVos = ctImpl.geTypeVos(market, storeName);
+		if (cVos != null && cVos.size() != 0) {
+			resultMap.put("CommodityType", cVos);
+		}else {
+			resultMap.put("result", "failed");
+		}
+		return resultMap;
+	}
+	
 }

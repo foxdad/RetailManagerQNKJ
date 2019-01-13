@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.boyu.kiss.entity.Market;
-import com.boyu.kiss.entity.MarketVo;
+import com.boyu.kiss.result.MarketVo;
 
 public interface MarketMapper extends BaseMapper<Market>{
 	/**

@@ -16,9 +16,9 @@ import com.boyu.kiss.entity.ActivityType;
 import com.boyu.kiss.entity.Advertisement;
 import com.boyu.kiss.entity.Commodity;
 import com.boyu.kiss.entity.Market;
-import com.boyu.kiss.entity.MarketVo;
 import com.boyu.kiss.entity.Store;
 import com.boyu.kiss.entity.StoreCommodityCount;
+import com.boyu.kiss.result.MarketVo;
 import com.boyu.kiss.service.impl.ActivitydetailServiceImpl;
 import com.boyu.kiss.service.impl.ActivitytypeServiceImpl;
 import com.boyu.kiss.service.impl.AdvertisementServiceImpl;
@@ -126,7 +126,7 @@ public class PlbIndexController {
 		resultMap.put("Recommendedshop",shopmap);
 		
 		List<MarketVo> mVos = mImpl.getMarkets();		
-		resultMap.put("market", mVos);                 //市场信息
+		resultMap.put("Market", mVos);                 //市场信息
 		return resultMap;
 	}
 	

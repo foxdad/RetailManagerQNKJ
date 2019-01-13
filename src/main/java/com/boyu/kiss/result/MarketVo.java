@@ -1,4 +1,4 @@
-package com.boyu.kiss.entity;
+package com.boyu.kiss.result;
 
 import java.io.Serializable;
 
