@@ -3,10 +3,13 @@ package com.boyu.kiss.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import com.boyu.kiss.entity.CommodityType;
 import com.boyu.kiss.mapper.CommodityTypeMapper;
+
+import com.boyu.kiss.service.CommodityTypeService;
 import com.boyu.kiss.result.CommodityTypeVo;
 import com.boyu.kiss.service.ICommodityTypeService;
 
@@ -25,5 +28,5 @@ public class CommodityTypeServiceImpl extends BaseServiceImpl<CommodityTypeMappe
 	public List<Integer> getTypeIds(Integer marketId, Integer storeId) {
 		return mapper.getTypeIds(marketId, storeId);
 	}
-	
+
 }

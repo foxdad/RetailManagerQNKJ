@@ -1,11 +1,12 @@
 package com.boyu.kiss.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.boyu.kiss.entity.CommodityType;
+
+
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-
-import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.boyu.kiss.entity.CommodityType;
 import com.boyu.kiss.result.CommodityTypeVo;
 
 public interface CommodityTypeMapper extends BaseMapper<CommodityType>{
@@ -24,4 +25,5 @@ public interface CommodityTypeMapper extends BaseMapper<CommodityType>{
 	 * @return
 	 */
 	public List<Integer> getTypeIds(@Param("marketId")Integer marketId,@Param("storeId")Integer storeId);
+
 }
