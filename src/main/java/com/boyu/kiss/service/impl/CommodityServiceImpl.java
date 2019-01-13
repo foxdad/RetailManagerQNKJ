@@ -21,8 +21,25 @@ public class CommodityServiceImpl extends BaseServiceImpl<CommodityMapper, Commo
 		return mapper.selectMaps(new EntityWrapper<Commodity>()
 				.setSqlSelect("id,Image,wholesalePrice,storeId")
 				.in("id", list)
+				.eq("isShelfs", 1)
+				);
+	}
+	@Override
+	public List<Map<String, Object>> getCommodity(Integer storeId,Integer typeId) {
+		return mapper.selectMaps(new EntityWrapper<Commodity>()
+				.setSqlSelect("id,goodsName,Image")
+				.eq("isShelfs", 1)
+				.eq("storeId", storeId)
+				.eq("firsttypeId", typeId)
+				);
+	}
+	@Override
+	public List<Map<String, Object>> getCommodityInfo(Integer commodityId) {
+		return mapper.selectMaps(new EntityWrapper<Commodity>()
+				.setSqlSelect("Image,stocks,minNum,ShelfLife,info,Detailedurl,imported")
+				.eq("firsttypeId",commodityId)
+				.eq("isShelfs", 1)
 				);
 	}
 
-	
 }

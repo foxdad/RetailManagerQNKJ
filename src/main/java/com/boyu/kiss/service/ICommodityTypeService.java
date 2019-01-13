@@ -14,4 +14,12 @@ public interface ICommodityTypeService {
 	 * @return
 	 */
 	public List<CommodityTypeVo> geTypeVos(String market,String storeName);
+	
+	/**
+	 * 根据市场id和店铺id查询商品分类id
+	 * @param marketId
+	 * @param storeId
+	 * @return
+	 */
+	public List<Integer> getTypeIds(Integer marketId,Integer storeId);
 }

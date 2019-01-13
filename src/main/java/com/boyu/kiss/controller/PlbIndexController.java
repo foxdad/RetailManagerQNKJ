@@ -60,10 +60,7 @@ public class PlbIndexController {
 		map.put("marketName", market);
 		List<Market> markets = mImpl.selectByMap(map);
 		Integer marketid = markets.get(0).getId(); //根据市场名获取市场id
-		EntityWrapper wrapper = new EntityWrapper<Advertisement>();
-		wrapper.setSqlSelect("advertisementId,advertisementURL")
-		.eq("marketid",marketid).eq("yxbj", 1);	
-		List<Map<String, Object>> adlMaps = aImpl.selectMaps(wrapper);
+		List<Map<String, Object>> adlMaps = aImpl.getAdvertisement(marketid);
 		resultMap.put("Advertisement", adlMaps); //放入广告信息
 		
 		//查询首页12条活动主题相关数据

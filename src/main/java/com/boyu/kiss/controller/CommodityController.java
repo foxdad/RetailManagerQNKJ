@@ -178,5 +178,40 @@ public class CommodityController {
 		return resultMap;
 	}
 	
+	/**
+	 * 根据分类id查询商品
+	 * @param storeId
+	 * @param typeId
+	 * @return
+	 */
+	@RequestMapping(value="/getCommodity")
+	@ResponseBody
+	public Map<String, Object> selectCommodityByType(Integer storeId,Integer typeId){
+		Map<String,Object> resultMap = new HashMap<>(); //返回结果集
+		List<Map<String, Object>> cList = commodityService.getCommodity(storeId, typeId);
+		if (cList != null && cList.size() != 0) {
+			resultMap.put("Commodity", cList);
+		}else {
+			resultMap.put("result", "没有查到相关商品");
+		}
+		return resultMap;
+	}
 	
+	/**
+	 * 查询商品详细信息接口
+	 * @param commodityId
+	 * @return
+	 */
+	@RequestMapping(value="/getCommodityInfo")
+	@ResponseBody
+	public Map<String, Object> selectCommodityInfo(Integer commodityId){
+		Map<String,Object> resultMap = new HashMap<>(); //返回结果集
+		List<Map<String, Object>> cList = commodityService.getCommodityInfo(commodityId);
+		if(cList != null && cList.size() != 0){
+			resultMap.put("CommodityInfo", cList);
+		}else {
+			resultMap.put("result", "failed");
+		}
+		return resultMap;
+	}
 }

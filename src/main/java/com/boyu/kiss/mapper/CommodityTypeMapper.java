@@ -16,4 +16,12 @@ public interface CommodityTypeMapper extends BaseMapper<CommodityType>{
 	 * @return
 	 */
 	public List<CommodityTypeVo> geTypeVos(@Param("market")String market,@Param("storeName")String storeName);
+	
+	/**
+	 * 根据市场id和店铺id查询商品分类id
+	 * @param marketId
+	 * @param storeId
+	 * @return
+	 */
+	public List<Integer> getTypeIds(@Param("marketId")Integer marketId,@Param("storeId")Integer storeId);
 }

@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.boyu.kiss.mapper.CommodityTypeMapper">
+	<!--根据市场名和店铺名查询商品分类信息 -->
 	<select id="geTypeVos" resultType="CommodityTypeVo">
 		SELECT `ClassificationId`,`ClassificationName` FROM `t_commoditytype`
 		WHERE storeid IN(
@@ -14,6 +15,23 @@
 			</if>
 			<if test="storeName != null and storeName != ''">
 			AND b.storeName = #{storeName}
+			</if>
+			)
+		</where>
+	</select>
+	
+	<!--根据市场id和店铺id查询商品分类id -->
+	<select id="getTypeIds" resultType="int">
+		SELECT `ClassificationId` FROM `t_commoditytype`
+		WHERE storeid IN(
+		SELECT b.storeid FROM `t_market` a,`t_store`b 
+		<where>
+			a.id = b.marketId
+			<if test="market != null and market != ''">
+			AND a.id = #{marketId}
+			</if>
+			<if test="storeName != null and storeName != ''">
+			AND b.storeId = #{storeId}
 			</if>
 			)
 		</where>

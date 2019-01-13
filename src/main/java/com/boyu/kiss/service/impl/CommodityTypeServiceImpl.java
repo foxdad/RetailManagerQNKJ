@@ -20,5 +20,10 @@ public class CommodityTypeServiceImpl extends BaseServiceImpl<CommodityTypeMappe
 	public List<CommodityTypeVo> geTypeVos(String market, String storeName) {
 		return mapper.geTypeVos(market, storeName);
 	}
+
+	@Override
+	public List<Integer> getTypeIds(Integer marketId, Integer storeId) {
+		return mapper.getTypeIds(marketId, storeId);
+	}
 	
 }
