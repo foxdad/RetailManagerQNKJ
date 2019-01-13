@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.boyu.kiss.entity.CommodityType;
 import com.boyu.kiss.mapper.CommodityTypeMapper;
 
-import com.boyu.kiss.service.CommodityTypeService;
 import com.boyu.kiss.result.CommodityTypeVo;
 import com.boyu.kiss.service.ICommodityTypeService;
 
