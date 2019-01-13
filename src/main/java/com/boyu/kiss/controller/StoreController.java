@@ -18,6 +18,8 @@ public class StoreController {
 
 	@Autowired
 	private StoreServiceImpl storeServiceImpl;
+	@Autowired
+	private StoreServiceImpl sImpl;
 
 	//修改店铺营业时间
 	@RequestMapping("/updateShopHours")
@@ -29,23 +31,16 @@ public class StoreController {
 			return "{\"result\": \"failed\"}";
 		}
 	}
-	@Autowired
-	private StoreServiceImpl sImpl;
-	
+
 	/**
-	 * 根据市场id查询批发商接口
+	 * 根据市场id查询批发商店铺接口
 	 * @param marketId
 	 * @return
 	 */
 	@RequestMapping(value = "/selectStore")
 	public Map<String, Object> getStore(Integer marketId) {
 		Map<String, Object> resultMap = new HashMap<>(); // 返回结果集
-		List<Map<String, Object>> sList = sImpl
-				.selectMaps(new EntityWrapper<Store>()
-				.setSqlSelect("storeId,storeName")
-				.eq("marketId", marketId)
-				.eq("type", 2)
-				);
+		List<Map<String, Object>> sList = sImpl.getStore(marketId);
 		if (sList != null && sList.size() != 0) {
 			resultMap.put("Store", sList);
 		} else {

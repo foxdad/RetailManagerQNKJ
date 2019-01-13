@@ -12,6 +12,5 @@ public interface IStoreOrderCountService {
 	 * @param num 前几个店铺
 	 * @return
 	 */
-	public List<Integer> gOrderCounts(Integer marketid
-			,String date,Integer num);
+	public List<Integer> gOrderCounts(Integer marketid,Integer num);
 }

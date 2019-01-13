@@ -159,6 +159,12 @@ public class CommodityController {
 
 	}
 	
+	/**
+	 * 查询商品分类信息接口
+	 * @param market 市场名字
+	 * @param storeName 店铺名字
+	 * @return
+	 */
 	@RequestMapping(value="/selectComodityType")
 	@ResponseBody
 	public Map<String, Object> selectCommodityType(String market,String storeName){
@@ -171,5 +177,6 @@ public class CommodityController {
 		}
 		return resultMap;
 	}
+	
 	
 }
