@@ -1,29 +1,37 @@
 package com.boyu.kiss.controller;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.commons.codec.binary.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.boyu.kiss.entity.Commodity;
+import com.boyu.kiss.entity.CommodityType;
 import com.boyu.kiss.service.impl.CommodityServiceImpl;
+import com.boyu.kiss.service.impl.CommodityTypeServiceImpl;
 
-@Controller
+@RestController
 public class CommodityController {
 
 	@Autowired
 	private CommodityServiceImpl commodityService;
+	
+	@Autowired
+	private CommodityTypeServiceImpl commodityTypeService;
 
 	//添加商品接口
 	@RequestMapping("/addCommodity.do")
@@ -55,7 +63,6 @@ public class CommodityController {
 		}
 
 	}*/
-	@ResponseBody
 	@RequestMapping("/test")
 	public String addCommodity(String str,HttpServletRequest request) {
 		//对字节数组字符串进行Base64解码并生成图片
@@ -80,6 +87,16 @@ public class CommodityController {
                     .format(new Date())
                     + (new Random().nextInt(9000) % (9000 - 1000 + 1) + 1000)
                     + ".jpg";
+           /* File path2 = new File(ResourceUtils.getURL("classpath:").getPath());
+            if(!path.exists())
+            	path2 = new File("");
+            System.out.println("path:"+path2.getAbsolutePath());
+
+            //如果上传目录为/static/images/upload/，则可以如下获取：
+            File upload = new File(path2.getAbsolutePath(),"static/images/commodity/");
+            if(!upload.exists()) upload.mkdirs();
+            System.out.println("upload url:"+upload.getAbsolutePath());*/
+
             String path = request.getServletContext().getRealPath("\\")+"\\static\\images\\commodity\\"+files;
             System.out.println(path);
             OutputStream out = new FileOutputStream(path);    
@@ -117,7 +134,7 @@ public class CommodityController {
                     + (new Random().nextInt(9000) % (9000 - 1000 + 1) + 1000)
                     + ".jpg";
             //存服务器的相对路径
-            String file = "\\static\\images\\"+path+"\\"+path+files;
+            String file = "\\static\\images\\"+path+"\\"+files;
             String filepath = request.getServletContext().getRealPath("\\")+file;
             System.out.println(path);
             OutputStream out = new FileOutputStream(filepath);    
@@ -160,12 +177,42 @@ public class CommodityController {
 	@RequestMapping("/deletesCommodity.do")
 	public String deletesCommodity(Integer [] commodityId) {
 		
-			List<Integer> idList = Arrays.asList(commodityId);
-			Integer rows = commodityService.deleteBatchIds(idList);
-			if(rows >= 1)
-				return "{\"result\": \"OK\"}";
+		List<Integer> idList = Arrays.asList(commodityId);
+		Integer rows = commodityService.deleteBatchIds(idList);
+		if(rows >= 1)
+			return "{\"result\": \"OK\"}";
 		
 		return "{\"result\": \"failed\"}";
 
+	}
+	//添加分类
+	@RequestMapping("/addCommodityType")
+	public String addCommodityType(CommodityType commodityType) {
+		
+		Integer rows = commodityTypeService.insert(commodityType);
+		if(rows == 1)
+			return "{\"result\": \"OK\"}";
+		else {
+			return "{\"result\": \"failed\"}";
+		}
+	}
+	//删除分类/批量删除分类
+	@RequestMapping("/deleteCommodityType")
+	public String deleteCommodityType(Integer[] classificationId) {
+		List<Integer> idList = Arrays.asList(classificationId);
+		Integer rows = commodityTypeService.deleteBatchIds(idList);
+		if(rows >= 1)
+			return "{\"result\": \"OK\"}";
+		else {
+			return "{\"result\": \"failed\"}";
+		}
+	}
+	//根据店铺id获取店铺的所有分类
+	@RequestMapping("/getAllCommodityType")
+	public List<CommodityType> getAllCommodityType(int storeId) {
+		Map<String, Object> map = new  HashMap<String,Object>();
+		map.put("storeId", storeId);
+		List<CommodityType> commodityTypeList = commodityTypeService.selectByMap(map);
+		return commodityTypeList;
 	}
 }

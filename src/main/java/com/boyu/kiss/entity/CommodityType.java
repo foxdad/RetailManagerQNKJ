@@ -21,6 +21,31 @@ public class CommodityType implements Serializable {
 
 	private int type;
 
+	private String typeDescribe;
+	
+	private int storeId;
+	
+	
+	public String getTypeDescribe() {
+		return typeDescribe;
+	}
+
+	public void setTypeDescribe(String typeDescribe) {
+		this.typeDescribe = typeDescribe;
+	}
+
+	public int getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(int storeId) {
+		this.storeId = storeId;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public CommodityType() {
 	}
 

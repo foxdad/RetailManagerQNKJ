@@ -19,7 +19,7 @@ public class StoreController {
 	@Autowired
 	private StoreServiceImpl storeServiceImpl;
 
-	//修改店铺营业时间
+	//修改店铺营业时间或修改店铺营业状态
 	@RequestMapping("/updateShopHours")
 	public String updateShopHours(Store store) {
 		int rows = storeServiceImpl.updateById(store);
