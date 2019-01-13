@@ -16,9 +16,9 @@ import com.boyu.kiss.entity.ActivityType;
 import com.boyu.kiss.entity.Advertisement;
 import com.boyu.kiss.entity.Commodity;
 import com.boyu.kiss.entity.Market;
-import com.boyu.kiss.entity.MarketVo;
 import com.boyu.kiss.entity.Store;
 import com.boyu.kiss.entity.StoreCommodityCount;
+import com.boyu.kiss.result.MarketVo;
 import com.boyu.kiss.service.impl.ActivitydetailServiceImpl;
 import com.boyu.kiss.service.impl.ActivitytypeServiceImpl;
 import com.boyu.kiss.service.impl.AdvertisementServiceImpl;
@@ -60,73 +60,35 @@ public class PlbIndexController {
 		map.put("marketName", market);
 		List<Market> markets = mImpl.selectByMap(map);
 		Integer marketid = markets.get(0).getId(); //根据市场名获取市场id
-		EntityWrapper wrapper = new EntityWrapper<Advertisement>();
-		wrapper.setSqlSelect("advertisementId,advertisementURL")
-		.eq("marketid",marketid).eq("yxbj", 1);	
-		List<Map<String, Object>> adlMaps = aImpl.selectMaps(wrapper);
+		List<Map<String, Object>> adlMaps = aImpl.getAdvertisement(marketid);
 		resultMap.put("Advertisement", adlMaps); //放入广告信息
 		
 		//查询首页12条活动主题相关数据
 		Map<String, Object> smap = new HashMap<>();
-		List<Map<String, Object>> tlMaps = 
-				acImpl.selectMaps(new EntityWrapper<ActivityType>()
-						.setSqlSelect("id,activity_theme")
-						);
-		List<Map<String, Object>> aclMaps1 =
-				adImpl.selectMaps(new EntityWrapper<ActivityDetail>()
-						.setSqlSelect("activityId,activity_item_Name,introduce,ImgURL")
-						.eq("marketid", marketid)
-						.eq("activityId", 1)
-						.eq("yxbj", 1)
-						.last("LIMIT 0,6")
-						);
-		List<Map<String, Object>> aclMaps2 =
-				adImpl.selectMaps(new EntityWrapper<ActivityDetail>()
-						.setSqlSelect("activityId,activity_item_Name,introduce,ImgURL")
-						.eq("marketid", marketid)
-						.eq("activityId", 2)
-						.eq("yxbj", 1)
-						.last("LIMIT 0,6")
-						);
-		List<Map<String, Object>> aclMaps3 =
-				adImpl.selectMaps(new EntityWrapper<ActivityDetail>()
-						.setSqlSelect("activityId,ImgURL")
-						.eq("marketid", marketid)
-						.eq("activityId", 3)
-						.eq("yxbj", 1)
-						.last("LIMIT 0,4")
-						);
+		List<Map<String, Object>> tlMaps = acImpl.queryActivitytype();
+		List<Map<String, Object>> aclMaps1 = adImpl.getActivitydetail(marketid, 1, 6);
+		List<Map<String, Object>> aclMaps2 = adImpl.getActivitydetail(marketid, 2, 6);
+		List<Map<String, Object>> aclMaps3 = adImpl.getActivitydetail(marketid, 3, 4);
 		smap.put("type", tlMaps);		//活动类型数据	
 		smap.put("data1", aclMaps1);  //活动主题类型1的数据
 		smap.put("data2", aclMaps2);  //活动主题类型2的数据
 		smap.put("data3", aclMaps3);  //活动主题类型3的数据(4张活动图片)
 		resultMap.put("Activity",smap);
 		
-		Map<String, Object> shopmap = new HashMap<>();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
-        String time = df.format(new Date());
-        String newtime = time.substring(0, 7); //获取指定格式日期
-        List<Integer> iList = soImpl.gOrderCounts(marketid, newtime, 3);//获取每月前三销量店铺id
-		List<Map<String, Object>> storeMap =
-				stImpl.selectMaps(new EntityWrapper<Store>()
-						.setSqlSelect("storeId,storeName,openTime,closeTime,logoUrl,slogan")
-						.in("storeId", iList)
-						);
-		List<Integer> cids = scImpl.getIdList(iList.get(0), newtime, 4);
-		cids.addAll(scImpl.getIdList(iList.get(1), newtime, 4));
-		cids.addAll(scImpl.getIdList(iList.get(2), newtime, 4)); //获取店铺排行前4的商品id
+		Map<String,Object> shopmap = new HashMap<>(); //返回店铺结果集
+        List<Integer> iList = soImpl.gOrderCounts(marketid,3);//获取每月前三销量店铺id
+		List<Map<String, Object>> storeMap = stImpl.getTopStore(iList);
+		List<Integer> cids = scImpl.getIdList(iList.get(0),4);
+		cids.addAll(scImpl.getIdList(iList.get(1),4));
+		cids.addAll(scImpl.getIdList(iList.get(2),4)); //获取店铺排行前4的商品id
 		//获取店铺推荐商品信息
-		List<Map<String, Object>> cMaps =
-		cImpl.selectMaps(new EntityWrapper<Commodity>()
-				.setSqlSelect("id,Image,wholesalePrice,storeId")
-				.in("id", cids)
-				);	
+		List<Map<String, Object>> cMaps = cImpl.getCommodity(cids);
 		shopmap.put("store",storeMap);					//推荐店铺信息
 		shopmap.put("commodity", cMaps);				//推荐店铺商品信息
 		resultMap.put("Recommendedshop",shopmap);
 		
 		List<MarketVo> mVos = mImpl.getMarkets();		
-		resultMap.put("market", mVos);                 //市场信息
+		resultMap.put("Market", mVos);                 //市场信息
 		return resultMap;
 	}
 	
@@ -143,13 +105,7 @@ public class PlbIndexController {
 		map.put("marketName", market);
 		List<Market> markets = mImpl.selectByMap(map);
 		Integer marketid = markets.get(0).getId(); //根据市场名获取市场id
-		List<Map<String, Object>> aclMaps1 =
-				adImpl.selectMaps(new EntityWrapper<ActivityDetail>()
-						.setSqlSelect("activityId,activity_item_Name,introduce,ImgURL")
-						.eq("marketid", marketid)
-						.eq("activityId", activityId)
-						.eq("yxbj", 1)
-						);
+		List<Map<String, Object>> aclMaps1 = adImpl.getMoreActivity(marketid, activityId);
 		if (aclMaps1 != null && aclMaps1.size() != 0) {
 			resultMap.put("activity", aclMaps1);
 		}else{

@@ -1,5 +1,9 @@
 package com.boyu.kiss.service;
 
-public interface IActivitytypeService {
+import java.util.List;
+import java.util.Map;
 
+public interface IActivitytypeService {
+	
+	public List<Map<String, Object>> queryActivitytype();
 }

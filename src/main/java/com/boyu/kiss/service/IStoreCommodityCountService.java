@@ -10,5 +10,5 @@ public interface IStoreCommodityCountService {
 	 * @param storeid
 	 * @return
 	 */
-	public List<Integer> getIdList(Integer storeid,String date,Integer num);
+	public List<Integer> getIdList(Integer storeid,Integer num);
 }

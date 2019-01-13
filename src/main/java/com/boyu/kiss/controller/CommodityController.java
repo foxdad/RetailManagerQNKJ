@@ -1,6 +1,5 @@
 package com.boyu.kiss.controller;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
@@ -15,12 +14,15 @@ import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.commons.codec.binary.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.boyu.kiss.entity.Commodity;
+
 import com.boyu.kiss.entity.CommodityType;
+
+import com.boyu.kiss.result.CommodityTypeVo;
+
 import com.boyu.kiss.service.impl.CommodityServiceImpl;
 import com.boyu.kiss.service.impl.CommodityTypeServiceImpl;
 
@@ -32,6 +34,10 @@ public class CommodityController {
 	
 	@Autowired
 	private CommodityTypeServiceImpl commodityTypeService;
+
+	@Autowired
+	private CommodityTypeServiceImpl ctImpl;
+
 
 	//添加商品接口
 	@RequestMapping("/addCommodity.do")
@@ -185,6 +191,7 @@ public class CommodityController {
 		return "{\"result\": \"failed\"}";
 
 	}
+
 	//添加分类
 	@RequestMapping("/addCommodityType")
 	public String addCommodityType(CommodityType commodityType) {
@@ -214,5 +221,62 @@ public class CommodityController {
 		map.put("storeId", storeId);
 		List<CommodityType> commodityTypeList = commodityTypeService.selectByMap(map);
 		return commodityTypeList;
+
+	}
+	/**
+	 * 查询商品分类信息接口
+	 * @param market 市场名字
+	 * @param storeName 店铺名字
+	 * @return
+	 */
+	@RequestMapping(value="/selectComodityType")
+
+	public Map<String, Object> selectCommodityType(String market,String storeName){
+		Map<String,Object> resultMap = new HashMap<>(); //返回结果集
+		List<CommodityTypeVo> cVos = ctImpl.geTypeVos(market, storeName);
+		if (cVos != null && cVos.size() != 0) {
+			resultMap.put("CommodityType", cVos);
+		}else {
+			resultMap.put("result", "failed");
+		}
+		return resultMap;
+	}
+	
+	/**
+	 * 根据分类id查询商品
+	 * @param storeId
+	 * @param typeId
+	 * @return
+	 */
+	@RequestMapping(value="/getCommodity")
+
+	public Map<String, Object> selectCommodityByType(Integer storeId,Integer typeId){
+		Map<String,Object> resultMap = new HashMap<>(); //返回结果集
+		List<Map<String, Object>> cList = commodityService.getCommodity(storeId, typeId);
+		if (cList != null && cList.size() != 0) {
+			resultMap.put("Commodity", cList);
+		}else {
+			resultMap.put("result", "没有查到相关商品");
+		}
+		return resultMap;
+	}
+	
+	/**
+	 * 查询商品详细信息接口
+	 * @param commodityId
+	 * @return
+	 */
+	@RequestMapping(value="/getCommodityInfo")
+
+	public Map<String, Object> selectCommodityInfo(Integer commodityId){
+		Map<String,Object> resultMap = new HashMap<>(); //返回结果集
+		List<Map<String, Object>> cList = commodityService.getCommodityInfo(commodityId);
+		if(cList != null && cList.size() != 0){
+			resultMap.put("CommodityInfo", cList);
+		}else {
+			resultMap.put("result", "failed");
+		}
+		return resultMap;
+
 	}
 }

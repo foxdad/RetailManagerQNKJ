@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.boyu.kiss.entity.Market;
-import com.boyu.kiss.entity.MarketVo;
 import com.boyu.kiss.mapper.MarketMapper;
+import com.boyu.kiss.result.MarketVo;
 import com.boyu.kiss.service.IMarketService;
 
 @Service
