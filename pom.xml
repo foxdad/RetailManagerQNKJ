@@ -42,6 +42,22 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<!-- base 64 图片处理jar包 -->
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency> 
+		   <groupId>javax.servlet.jsp</groupId> 
+		   <artifactId>jsp-api</artifactId> 
+		   <version>2.1</version> 
+		   <scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

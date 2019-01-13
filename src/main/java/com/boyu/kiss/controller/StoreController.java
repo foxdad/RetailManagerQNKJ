@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,19 @@ import com.boyu.kiss.service.impl.StoreServiceImpl;
 @RestController
 public class StoreController {
 
+	@Autowired
+	private StoreServiceImpl storeServiceImpl;
+
+	//修改店铺营业时间
+	@RequestMapping("/updateShopHours")
+	public String updateShopHours(Store store) {
+		int rows = storeServiceImpl.updateById(store);
+		if(rows == 1)
+			return "{\"result\": \"OK\"}";
+		else {
+			return "{\"result\": \"failed\"}";
+		}
+	}
 	@Autowired
 	private StoreServiceImpl sImpl;
 	

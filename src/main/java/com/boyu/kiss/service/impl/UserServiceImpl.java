@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.boyu.kiss.entity.Commodity;
 import com.boyu.kiss.entity.OrderVO;
 import com.boyu.kiss.entity.Store;
 import com.boyu.kiss.entity.User;
@@ -33,6 +34,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper,User> implements
 	private OrderServiceImpl orderService;
 	@Autowired
 	private ShopcartServiceImpl shopcartService;
+	@Autowired
+	private CommodityServiceImpl commodityService;
 	public Map<String, Object> login(String username, String password, int roleId) {
 		
 		List<User> list = null;
@@ -66,10 +69,14 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper,User> implements
 					
 					Store store = storeService.selectById(storeId);
 					
+					Map<String, Object> commodityMap = new HashMap<String,Object>();
+					commodityMap.put("storeId", storeId);
+					List<Commodity> commodityList = commodityService.selectByMap(commodityMap);
 					resultMap.put("user", user);
 					resultMap.put("userInfo", userInfo);
 					resultMap.put("orderList", orderList);
 					resultMap.put("store", store);
+					resultMap.put("commodityList", commodityList);
 				}
 				else if(roleId == 0) {
 					int role = user.getRoleid();
