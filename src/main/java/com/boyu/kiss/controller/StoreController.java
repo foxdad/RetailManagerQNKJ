@@ -35,7 +35,7 @@ public class StoreController {
 		if (sList != null && sList.size() != 0) {
 			resultMap.put("Store", sList);
 		} else {
-			resultMap.put("result", "failed");
+			resultMap.put("result", "没有查询到相关商店");
 		}
 		return resultMap;
 	}
