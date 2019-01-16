@@ -53,4 +53,11 @@
 		FROM t_order o,t_orderitem i,t_commodity c 
 		WHERE o.id = i.orderId AND i.goodsId = c.id AND i.storeId = #{storeId}
 	</select>
+	<select id="getOrderByTime" resultMap="getOrderitemResultMap" >
+		SELECT c.id AS commodityid,c.goodsName,c.Image,c.unit,c.info,o.*,
+		i.id AS orderitemId,i.number,i.subtotal,i.storeId 
+		FROM t_order o,t_orderitem i,t_commodity c 
+		WHERE o.id = i.orderId AND i.goodsId = c.id AND i.storeId = #{storeId}
+		and o.orderTime between #{startTime} and #{endTime};   
+	</select>
 </mapper>

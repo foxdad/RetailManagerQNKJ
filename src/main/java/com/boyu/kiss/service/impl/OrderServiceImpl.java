@@ -23,4 +23,8 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderMapper,Order> impleme
 		List<OrderVO> list = orderMapper.getOrderByStoreId(storeId);
 		return list;
 	}
+	public List<OrderVO> getOrderByTime(int storeId,String startTime,String endTime){
+		List<OrderVO> list = orderMapper.getOrderByTime(storeId, startTime, endTime);
+		return list;
+	}
 }

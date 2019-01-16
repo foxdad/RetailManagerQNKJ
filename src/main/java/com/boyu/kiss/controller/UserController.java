@@ -89,7 +89,7 @@ public class UserController {
 	}
 	//注册
 	@RequestMapping("/register")
-	public GetRegisterResult register(String phone,String password,String code) {
+	public GetRegisterResult register(String phone,String password,String code,int roleId) {
 		boolean bPhone = Pattern.matches(REGEX_PHONE,phone);
 		boolean bPassword = Pattern.matches(REGEX_PASSWORD,password);
 		
@@ -120,6 +120,7 @@ public class UserController {
 					User user = new User();
 					user.setUserName(phone);
 					user.setPassword(password);
+					user.setRoleid(roleId);
 					int rows = serviceImpl.insert(user);
 					//判断是否注册成功
 					if(rows == 1) {
