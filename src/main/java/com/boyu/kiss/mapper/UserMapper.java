@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 import com.boyu.kiss.entity.User;
+import com.boyu.kiss.result.UserVO;
 
 public interface UserMapper extends BaseMapper<User>{
 
@@ -19,4 +20,7 @@ public interface UserMapper extends BaseMapper<User>{
 	 * @return
 	 */
 	public User selectUser(@Param("username")String username,@Param("password")String password);
+	
+	public List<UserVO> selectUserList();
+	
 }

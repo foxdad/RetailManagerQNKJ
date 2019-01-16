@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.boyu.kiss.entity.User;
+import com.boyu.kiss.result.UserVO;
 
 /**
  * 
@@ -15,4 +16,7 @@ public interface IUserService{
 	public Map<String, Object> login(String username, String password, int roleId);
 	
 	public User selectUser(String username, String password);
+	
+	
+	public List<UserVO> selectUserList();
 }

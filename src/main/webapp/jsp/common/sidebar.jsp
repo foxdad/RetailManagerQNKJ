@@ -17,8 +17,8 @@
   <ul>
     <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>用户管理</span> <span class="label label-important">2</span></a>
       <ul>
-        <li><a href="${ctx}/jsp/pre/log.jsp">添加管理员</a></li>
-        <li><a href="${ctx}/jsp/pre/personlog.jsp">查看用户列表</a></li>
+        <li><a href="${ctx}/jsp/pre/addAdmin.jsp">添加管理员</a></li>
+        <li><a href="${ctx}/selectUserList">查看用户列表</a></li>
       </ul>
     </li>
     <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>商家信息</span> <span class="label label-important">2</span></a>

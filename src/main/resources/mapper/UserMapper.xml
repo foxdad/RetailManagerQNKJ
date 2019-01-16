@@ -13,4 +13,10 @@
 		username = #{username} and password = #{password}
 		and roleid not in(1,2,3)
 	</select>
+	<select id="selectUserList" resultType="UserVO">
+		SELECT t_user.Id,t_user.userName,
+		(SELECT `name` FROM t_role WHERE id = t_user.roleid) AS roleName,
+		info.phone,info.name FROM t_user,t_userinfo info 
+		WHERE t_user.id = info.userid
+	</select>
 </mapper>

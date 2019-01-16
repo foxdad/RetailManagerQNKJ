@@ -14,7 +14,7 @@
 </div>
 
 <!--end-Footer-part-->
-
+<script src="${ctx}/statics/js/jquery.min.js"></script> 
 <script src="${ctx}/statics/js/excanvas.min.js"></script> 
 
 <script src="${ctx}/statics/js/jquery.ui.custom.js"></script> 
@@ -36,7 +36,8 @@
 <script src="${ctx}/statics/js/matrix.popover.js"></script> 
 <script src="${ctx}/statics/js/jquery.dataTables.min.js"></script> 
 <script src="${ctx}/statics/js/matrix.tables.js"></script> 
-
+<script src="${ctx}/statics/layui/layui.js"></script>
+<script src="${ctx}/statics/layer/layer.js"></script>
 <script type="text/javascript">
   // This function is called from the pop-up menus to transfer to
   // a different page. Ignore if the value returned is a null string:

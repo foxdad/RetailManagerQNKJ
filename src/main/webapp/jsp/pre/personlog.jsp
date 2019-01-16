@@ -17,15 +17,15 @@
 <!--End-breadcrumbs-->
 	<!--Action boxes-->
 	<div class="container-fluid">	
-    <h1>个人日志表</h1>
-	<div class="layui-inline"> <!-- 注意：这一层元素并不是必须的 -->
+    <h1>用户列表</h1>
+	<!-- <div class="layui-inline"> 注意：这一层元素并不是必须的
 		开始日期：
   		<input type="text" class="layui-input" id="startTime">
   		截止日期
   		<input type="text" class="layui-input" id="endTime">
   		<button class="layui-btn layui-btn-radius layui-btn-normal" id="selectByTime" data-type="reload">搜索</button>
 	</div>
-	
+	 -->
 	<table id="demo" lay-filter="test"></table>
 	</div>
 	</div>
@@ -43,8 +43,8 @@
 		  table.render({
 		    elem: '#demo'
 		    ,height: 400
-		    ,url: '/ERP/selectLog' //数据接口
-		    ,where: {userId : "${user.userId}"} //接口其他参数
+		    ,url: 'RetailManager/selectUserList' //数据接口
+		   
 		    ,page: true //开启分页
 		    ,toolbar : true //开启工具栏
 		    ,title : "个人日志表" //定义table大标题
@@ -58,11 +58,11 @@
 		          };
 		        }
 		    ,cols: [[ //表头
-		      {field: 'userName', title: '用户姓名', sort: true, fixed: 'left'}
-		      ,{field: 'importance', title: '重要程度', sort: true}
-		      ,{field: 'read', title: '上级是否查看', sort: true}
-		      ,{field: 'sendTime', title: '提交日期', sort: true}
-		      ,{field:'right', title: '操作', width:177,toolbar:"#barDemo"}		      
+		      {field: 'Id', title: '编号', sort: true, fixed: 'left'}
+		      ,{field: 'userName', title: '账号',}
+		      ,{field: 'name', title: '姓名', }
+		      ,{field: 'phone', title: '手机号',}
+		      ,{field:'roleName', title: '角色', width:177,toolbar:"#barDemo"}		      
 		    ]]
 		  });
 			//监听工具条
