@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.boyu.kiss.entity.Store;
+import com.boyu.kiss.result.StoreVo;
 import com.boyu.kiss.service.impl.StoreServiceImpl;
 import com.boyu.kiss.utils.ImgsUtil;
 
@@ -113,5 +114,17 @@ public class StoreController {
 			resultMap.put("result", "没有查询到相关商店");
 		}
 		return resultMap;
+	}
+	
+	@RequestMapping(value="/getStorePage")
+	public Map<String, Object> selectStore(String storeName,String ownerName,Integer page,Integer limit){
+		Map<String, Object> resultMap = new HashMap<>(); // 返回结果集
+		Integer count = storeServiceImpl.getCountStore(ownerName, storeName);
+		int begin = (page-1) * limit;
+		int end = limit;
+		List<StoreVo> sVos = storeServiceImpl.getStoreVo(ownerName, storeName, begin, end);
+		resultMap.put("count", count);
+		resultMap.put("data", sVos);		
+		return resultMap;		
 	}
 }

@@ -21,10 +21,9 @@
         <li><a href="${ctx}/jsp/pre/personlog.jsp">查看用户列表</a></li>
       </ul>
     </li>
-    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>商家信息</span> <span class="label label-important">2</span></a>
+    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>商家信息</span> <span class="label label-important">1</span></a>
       <ul>
-        <li><a href="${ctx}/toaddleave">商家列表</a></li>
-        <li><a href="${ctx}/jsp/pre/personlog.jsp">店铺审核</a></li>
+        <li><a href="${ctx}/jsp/pre/storeExamine.jsp">商家列表</a></li>
       </ul>
     </li>
     <li><a href="tables.html"><i class="icon icon-th"></i> <span>任务信息</span></a></li>

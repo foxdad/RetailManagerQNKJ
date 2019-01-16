@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.boyu.kiss.entity.Store;
 import com.boyu.kiss.mapper.StoreMapper;
+import com.boyu.kiss.result.StoreVo;
 import com.boyu.kiss.service.IStoreService;
 
 @Service
@@ -33,6 +34,16 @@ public class StoreServiceImpl extends BaseServiceImpl<StoreMapper, Store> implem
 				.setSqlSelect("storeId,storeName,openTime,closeTime,logoUrl,slogan")
 				.in("storeId", list)
 				);
+	}
+
+	@Override
+	public List<StoreVo> getStoreVo(String ownerName, String storeName, Integer begin, Integer end) {
+		return smapper.getStoreVo(ownerName, storeName, begin, end);
+	}
+
+	@Override
+	public int getCountStore(String ownerName, String storeName) {
+		return smapper.getCountStore(ownerName, storeName);
 	}
 	
 	
