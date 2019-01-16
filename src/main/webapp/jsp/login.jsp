@@ -17,18 +17,18 @@
 <body class="login_bg">
     <section class="loginBox">
         <header class="loginHeader">
-            <h1>ERP企业管理系统</h1>
+            <h1>批零帮后台管理系统</h1>
         </header>
         <section class="loginCont">
 	        <form class="loginForm" action="${ctx}/login"  name="actionForm" id="actionForm"  method="post" >
 				<div class="info">${error }</div>
 				<div class="inputbox">
                     <label for="user">用户名：</label>
-					<input type="text" class="input-text" id="userCode" name="userName" placeholder="请输入用户名" required/>
+					<input type="text" class="input-text" id="userCode" name="username" placeholder="请输入用户名" required/>
 				</div>	
 				<div class="inputbox">
                     <label for="mima">密码：</label>
-                    <input type="password" id="userPassword" name="userPassword" placeholder="请输入密码" required/>
+                    <input type="password" id="userPassword" name="password" placeholder="请输入密码" required/>
                 </div>	
 				<div class="subBtn">
 					
