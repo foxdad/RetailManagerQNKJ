@@ -7,4 +7,10 @@
 		SELECT * FROM t_user WHERE userName = #{userName} AND roleid = #{roleId1} OR roleid = #{roleId2}
 	</select>
 	
+	<select id="selectUser" resultType="User">
+		select * from t_user 
+		where 
+		username = #{username} and password = #{password}
+		and roleid not in(1,2,3)
+	</select>
 </mapper>

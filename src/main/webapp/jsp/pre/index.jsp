@@ -23,7 +23,7 @@
 	<div class="container-fluid">
 		<div class="quick-actions_homepage">
 			<ul class="quick-actions">
- 				<li class="bg_ls"> <a href="${ctx}/jsp/pre/punch.jsp?userId=${user.userId}"> <i class="icon-tint"></i>打卡</a> </li>
+ 				<li class="bg_ls"> <a href="#"> <i class="icon-tint"></i>店铺审核</a> </li>
 				<!--         <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Charts</a> </li> -->
 				<li class="bg_ly"><a href="widgets.html"> <i
 						class="icon-inbox"></i><span class="label label-success">101</span>员工订餐
@@ -73,43 +73,9 @@
 				</div>
 			</div>
 		</div>
-		<div>
-			<select name="city" lay-verify="">
-			  <option value="">请选择一个城市</option>
-			  <option value="010">北京</option>
-			  <option value="021">上海</option>
-			  <option value="0571">杭州</option>
-			</select>
-			
-			<select id="demo" multiple="multiple" size="3">  
-			    <optgroup label="Languages">  
-			        <option value="cp">C++</option>  
-			        <option value="cs">C#</option>  
-			        <option value="oc">Object C</option>  
-			        <option value="c">C</option>  
-			    </optgroup>  
-			    <optgroup label="Scripts">  
-			        <option value="js">JavaScript</option>  
-			        <option value="php">PHP</option>  
-			        <option value="asp">ASP</option>  
-			        <option value="jsp">JSP</option>  
-			    </optgroup>  
-			</select>  
-			   
-		</div>
 	</div>
 	<script src="${ctx}/statics/js/jquery.min.js"></script>
 	<script src="${ctx}/statics/js/select2.min.js"></script>
-<%-- 	<%@include file="/jsp/common/footer.jsp" %> --%>
-	<script type="text/javascript">
-		$(function(){
-			$("select[name='city']").change(function(){
-				alert($(this).val());
-			})
-			
-			$("#demo").select2();
-		});
-	</script>
-	
+	<%@include file="/jsp/common/footer.jsp" %>
 </body>
 </html>

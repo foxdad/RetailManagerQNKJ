@@ -119,5 +119,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper,User> implements
 		resultMap.put("test", list);*/
 		return resultMap;
 	}
+	@Override
+	public User selectUser(String username, String password) {
+		return userMapper.selectUser(username, password);
+	}
+
+
 
 }

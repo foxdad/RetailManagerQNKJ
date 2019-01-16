@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -155,5 +157,16 @@ public class UserController {
 		 }
 		 return  result;
 	  }
-
+	
+	@RequestMapping(value="/login")
+	public String loginning(String username,String password,HttpServletRequest request){
+		User user = serviceImpl.selectUser(username, password);
+		if (user != null) {
+			request.getSession().setAttribute("user", user);
+			return "pre/index";
+		}else {
+			request.setAttribute("error", "用户名或密码错误");
+			return "login";
+		}		
+	}
 }
