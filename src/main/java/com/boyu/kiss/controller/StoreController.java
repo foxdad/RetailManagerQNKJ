@@ -52,7 +52,7 @@ public class StoreController {
 			store.setYxzsUrl(yxzsUrl);
 			store.setYyxkz(yyxkz);
 			
-			int rows = storeServiceImpl.updateById(store);
+			int rows = storeServiceImpl.insert(store);
 			if(rows == 1)
 				return "{\"result\": \"OK\"}";
 			else {
