@@ -36,8 +36,8 @@ public class CommodityServiceImpl extends BaseServiceImpl<CommodityMapper, Commo
 	@Override
 	public List<Map<String, Object>> getCommodityInfo(Integer commodityId) {
 		return mapper.selectMaps(new EntityWrapper<Commodity>()
-				.setSqlSelect("Image,stocks,minNum,ShelfLife,info,Detailedurl,imported,wholesalePrice,unit")
-				.eq("firsttypeId",commodityId)
+				.setSqlSelect("Image,stocks,minNum,ShelfLife,info,Detailedurl,imported,wholesalePrice,unit,retailPrice,brand")
+				.eq("id", commodityId)
 				.eq("isShelfs", 1)
 				);
 	}
