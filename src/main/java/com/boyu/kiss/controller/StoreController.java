@@ -34,7 +34,7 @@ public class StoreController {
 		}
 	}
 
-	//上传营业执照 ----数据库未修改
+	//上传营业执照 
 	@RequestMapping("/storeCertification")
 	public String storeCertification(Store store,HttpServletRequest request) {
 		String dpjydUrl = ImgsUtil.upImgs(store.getDpjydUrl(), "store", request);
@@ -63,6 +63,41 @@ public class StoreController {
 			return "{\"result\": \"failed\"}";
 		}
 	}
+	//上传营业执照 
+		@RequestMapping("/againStoreCertification")
+		public String againStoreCertification(Store store,HttpServletRequest request) {
+			String dpjydUrl = ImgsUtil.upImgs(store.getDpjydUrl(), "store", request);
+			String dzsfzUrl = ImgsUtil.upImgs(store.getDzsfzUrl(), "store", request);
+			String handheldIdURL = ImgsUtil.upImgs(store.getHandheIdURL(), "store", request);
+			String reverseIdURL = ImgsUtil.upImgs(store.getReverseIdURL(), "store", request);
+			String yxzsUrl = ImgsUtil.upImgs(store.getYxzsUrl(), "store", request);
+			String yyxkz = ImgsUtil.upImgs(store.getYyxkz(), "store", request);
+			if(dpjydUrl!=null&& dzsfzUrl!=null&&handheldIdURL !=null 
+					&&reverseIdURL !=null&&yxzsUrl!=null&&yyxkz!=null) {
+				store.setDpjydUrl(dpjydUrl);
+				store.setDzsfzUrl(dzsfzUrl);
+				store.setHandheIdURL(handheldIdURL);
+				store.setReverseIdURL(reverseIdURL);
+				store.setYxzsUrl(yxzsUrl);
+				store.setYyxkz(yyxkz);
+				Map<String,Object> map = new HashMap<String,Object>();
+				map.put("userId", store.getUserId());
+				List<Store> storeList = storeServiceImpl.selectByMap(map);
+				if(storeList!=null&&storeList.size()>0) {
+					store.setStoreId(storeList.get(0).getStoreId());
+					int rows = storeServiceImpl.updateById(store);
+					if(rows == 1)
+						return "{\"result\": \"OK\"}";
+					else {
+						return "{\"result\": \"failed\"}";
+					}
+				}
+				return "{\"result\": \"failed\"}";
+			}
+			else {
+				return "{\"result\": \"failed\"}";
+			}
+		}
 	/**
 	 * 根据市场id查询批发商店铺接口
 	 * @param marketId
