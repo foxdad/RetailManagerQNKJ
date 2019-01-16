@@ -12,55 +12,44 @@ public class Store implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@TableId
-	private int storeId;
+	private int storeId;//店铺id
 
-	private String address;
-
-	private String closeTime;
-
+	private String address;//店铺地址
 	private String dpjydUrl;//店铺经营地
-
 	private String dzsfzUrl;//身份证正面
-
-	private String license;
-
-	private int marketId;
-
-	private String openTime;
-
-	private String ownerName;
-
-	private String phone;
-
-	private int shtg;
-
-	private int state;
-
-	private String storeName;
-
-	private String storeType;
-
-	private int type;
-
-	private String yxzsUrl;
-
-	private String yyxkz;//营业许可
-	
-	private String logoUrl;
-	
-	private String slogan;
-	private int monday;
-	private int tuesday;
-	private int wednesday;
-	private int thursday;
-	private int friday;
-	private int sunday;
-	private int saturday;
+	private String license;//经营许可证号
+	private int marketId;//所属市场id
+	private String ownerName;//店主姓名
+	private String phone;//手机号
+	private String storeName;//店铺名字
+	private String storeType;//店铺类型
+	private int type;// 1、零售商2、批发商
+	private String yxzsUrl;//优秀证书保存地址
+	private String yyxkz;//营业许可URL
+	private String logoUrl;//店铺logo
+	private String slogan;//标语
+	private int monday;//星期一
+	private int tuesday;//二
+	private int wednesday;//三
+	private int thursday;//四
+	private int friday;//五
+	private int sunday;//六
+	private int saturday;//日
 	private String handheIdURL;//手持身份证
 	private String reverseIdURL;//身份证反面
-	
-	
-	
+	private String userId;//用户id
+	private String closeTime;//打烊时间
+	private String openTime;//开始营业时间
+	private int state;
+	private int shtg;
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	public String getHandheIdURL() {
 		return handheIdURL;
 	}

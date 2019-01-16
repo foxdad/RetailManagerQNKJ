@@ -33,7 +33,7 @@
 		</association>
 	</resultMap>
 	<!-- 查询指定个数活动首页广告 -->
-	<select id="getCommentList" resultType="resultComment">
+	<select id="getCommentList" resultMap="resultComment">
 		SELECT eva.*,u.name,o.number,o.subtotal,c.id AS commodityId,
 		c.goodsName,c.Image,c.unit,c.info
 FROM t_commentorder eva,t_commodity c,t_userinfo u,orderitem o
