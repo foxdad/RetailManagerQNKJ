@@ -7,10 +7,12 @@ import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.druid.util.MapComparator;
 import com.boyu.kiss.entity.CodeInforVo;
 import com.boyu.kiss.entity.User;
 import com.boyu.kiss.result.GetRegisterResult;
@@ -43,7 +45,7 @@ public class UserController {
 		serviceImpl.insert(user);
 		return "success";
 	}
-	
+
 	@RequestMapping("/login.do")
 	@ResponseBody
 	public Map<String, Object> login(String username,String password,int roleId) {
