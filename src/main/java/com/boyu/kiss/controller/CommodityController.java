@@ -37,10 +37,6 @@ public class CommodityController {
 	@Autowired
 	private CommodityTypeServiceImpl commodityTypeService;
 
-	@Autowired
-	private CommodityTypeServiceImpl ctImpl;
-
-
 	//添加商品接口
 	@RequestMapping("/addCommodity.do")
 	public String addCommodity(Commodity commodity,HttpServletRequest request) {
@@ -175,6 +171,16 @@ public class CommodityController {
 			return "{\"result\": \"failed\"}";
 		}
 	}
+	//修改商品分类
+	@RequestMapping("/updateCommodityType.do")
+	public String updateCommodityType(CommodityType commodityType) {
+		Integer rows = commodityTypeService.updateById(commodityType);
+		if(rows == 1)
+			return "{\"result\": \"OK\"}";
+		else {
+			return "{\"result\": \"failed\"}";
+		}
+	}
 	//删除分类/批量删除分类
 	@RequestMapping("/deleteCommodityType")
 	public String deleteCommodityType(Integer[] classificationId) {
@@ -205,7 +211,7 @@ public class CommodityController {
 
 	public Map<String, Object> selectCommodityType(String market,String storeName){
 		Map<String,Object> resultMap = new HashMap<>(); //返回结果集
-		List<CommodityTypeVo> cVos = ctImpl.geTypeVos(market, storeName);
+		List<CommodityTypeVo> cVos = commodityTypeService.geTypeVos(market, storeName);
 		if (cVos != null && cVos.size() != 0) {
 			resultMap.put("CommodityType", cVos);
 		}else {

@@ -14,7 +14,7 @@ public class ImgsUtil{
 
 	public static String upImgs(String strbase64,String path,HttpServletRequest request) {
 		//对字节数组字符串进行Base64解码并生成图片
-        if (strbase64 == null) //图像数据为空
+        if (strbase64 == null || strbase64.length()<1) //图像数据为空
         	return null;
       
         try 

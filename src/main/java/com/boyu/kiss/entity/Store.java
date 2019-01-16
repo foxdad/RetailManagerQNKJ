@@ -18,9 +18,9 @@ public class Store implements Serializable {
 
 	private String closeTime;
 
-	private String dpjydUrl;
+	private String dpjydUrl;//店铺经营地
 
-	private String dzsfzUrl;
+	private String dzsfzUrl;//身份证正面
 
 	private String license;
 
@@ -44,7 +44,7 @@ public class Store implements Serializable {
 
 	private String yxzsUrl;
 
-	private String yyxkz;
+	private String yyxkz;//营业许可
 	
 	private String logoUrl;
 	
@@ -56,8 +56,27 @@ public class Store implements Serializable {
 	private int friday;
 	private int sunday;
 	private int saturday;
+	private String handheIdURL;//手持身份证
+	private String reverseIdURL;//身份证反面
 	
 	
+	
+	public String getHandheIdURL() {
+		return handheIdURL;
+	}
+
+	public void setHandheIdURL(String handheldIdURL) {
+		this.handheIdURL = handheldIdURL;
+	}
+
+	public String getReverseIdURL() {
+		return reverseIdURL;
+	}
+
+	public void setReverseIdURL(String reverseIdURL) {
+		this.reverseIdURL = reverseIdURL;
+	}
+
 	public int getMonday() {
 		return monday;
 	}

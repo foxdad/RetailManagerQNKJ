@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boyu.kiss.mapper.CommentorderMapper">
+	<!--自定义特殊活动查询结果集 -->
+	<resultMap type="com.boyu.kiss.result.CommentOrderVO" id="resultComment">
+		<id column="id" property="id"/>
+		<result column="score" property="score"/>
+		<result column="comment" property="comment"/>
+		<result column="comment_time" property="commentTime"/>
+		<result column="comment_img1" property="commentImg1"/>
+		<result column="comment_img2" property="commentImg2"/>
+		<result column="comment_img3" property="commentImg3"/>
+		<result column="append_comment" property="appendComment"/>
+		<result column="append_comment_img1" property="appendCommentImg1"/>
+		<result column="append_comment_img2" property="appendCommentImg2"/>
+		<result column="append_comment_img3" property="appendCommentImg3"/>
+		<result column="comment_user" property="commentUser"/>
+		<result column="reply" property="reply"/>
+		<result column="name" property="userName"/>
+		
+		<association property="orderitemVO" javaType="OrderitemVO">
+			<id column="orderitemid" property="orderitemid"/>
+			<result column="number" property="number"/>
+			<result column="subtotal" property="subtotal"/>
+			<result column="commodityid" property="commodityid"/>
+			<result column="goodsName" property="goodsName"/>
+			<result column="Image" property="Image"/>
+			<result column="unit" property="unit"/>
+			<result column="info" property="info"/>
+		</association>
+	</resultMap>
+	<!-- 查询指定个数活动首页广告 -->
+	<select id="getCommentList" resultType="resultComment">
+		SELECT eva.*,u.name,o.number,o.subtotal,c.id AS commodityId,
+		c.goodsName,c.Image,c.unit,c.info
+FROM t_commentorder eva,t_commodity c,t_userinfo u,orderitem o
+WHERE eva.orderitemid= o.id AND o.goodsId = c.id AND eva.comment_user = u.userId 
+AND (SELECT storeId FROM t_commodity WHERE id = goodsId) = #{storeId}
+	</select>
+</mapper>
