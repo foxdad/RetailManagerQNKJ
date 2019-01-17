@@ -2,7 +2,7 @@ package com.boyu.kiss.result;
 
 public class UserVO {
 
-	private int id;
+	private int Id;
 	private String name;
 
 	private String phone;
@@ -12,11 +12,10 @@ public class UserVO {
 	private String userName;
 
 	public int getId() {
-		return id;
+		return Id;
 	}
 
 	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getName() {

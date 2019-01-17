@@ -18,5 +18,7 @@ public interface IUserService{
 	public User selectUser(String username, String password);
 	
 	
-	public List<UserVO> selectUserList();
+	public List<UserVO> selectUserList(int begin,int end);
+	
+	public int selectUserListCount();
 }

@@ -43,11 +43,11 @@
 		  table.render({
 		    elem: '#demo'
 		    ,height: 400
-		    ,url: 'RetailManager/selectUserList' //数据接口
+		    ,url: '/RetailManager/selectUserList' //数据接口
 		   
 		    ,page: true //开启分页
 		    ,toolbar : true //开启工具栏
-		    ,title : "个人日志表" //定义table大标题
+		    ,title : "用户列表" //定义table大标题
 		    ,id : "logTables"
 		    ,parseData: function(res){ //res 即为原始返回的数据
 		        return {
@@ -58,10 +58,10 @@
 		          };
 		        }
 		    ,cols: [[ //表头
-		      {field: 'Id', title: '编号', sort: true, fixed: 'left'}
-		      ,{field: 'userName', title: '账号',}
-		      ,{field: 'name', title: '姓名', }
-		      ,{field: 'phone', title: '手机号',}
+		      {field: 'id', title: '编号', sort: true, fixed: 'left'}
+		      ,{field: 'userName', title: '账号', sort: true}
+		      ,{field: 'name', title: '姓名', sort: true}
+		      ,{field: 'phone', title: '手机号', sort: true}
 		      ,{field:'roleName', title: '角色', width:177,toolbar:"#barDemo"}		      
 		    ]]
 		  });

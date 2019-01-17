@@ -21,6 +21,8 @@ public interface UserMapper extends BaseMapper<User>{
 	 */
 	public User selectUser(@Param("username")String username,@Param("password")String password);
 	
-	public List<UserVO> selectUserList();
+	public List<UserVO> selectUserList(@Param("begin")int begin,@Param("end")int end);
+
+	public int selectUserListCount();
 	
 }

@@ -18,5 +18,14 @@
 		(SELECT `name` FROM t_role WHERE id = t_user.roleid) AS roleName,
 		info.phone,info.name FROM t_user,t_userinfo info 
 		WHERE t_user.id = info.userid
+		<if test="begin != null and end != null">
+		LIMIT #{begin} , #{end}
+		</if>
+	</select>
+	
+	<select id="selectUserListCount" resultType="Integer">
+		SELECT count(1) FROM t_user,t_userinfo info 
+		WHERE t_user.id = info.userid
+		
 	</select>
 </mapper>
