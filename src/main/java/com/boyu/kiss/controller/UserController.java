@@ -1,6 +1,7 @@
 package com.boyu.kiss.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.regex.Pattern;
@@ -9,15 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.druid.util.MapComparator;
 import com.boyu.kiss.entity.CodeInforVo;
+import com.boyu.kiss.entity.RoleMenu;
 import com.boyu.kiss.entity.User;
 import com.boyu.kiss.result.GetRegisterResult;
+import com.boyu.kiss.result.UserVO;
+import com.boyu.kiss.service.impl.RoleMenuServiceImpl;
 import com.boyu.kiss.service.impl.UserServiceImpl;
 import com.boyu.kiss.utils.SMS;
 
@@ -32,7 +34,8 @@ public class UserController {
 	
 	@Autowired
 	private UserServiceImpl serviceImpl;
-	
+	@Autowired
+	private RoleMenuServiceImpl roleMenuService;
 	
 	@RequestMapping("/getUser.do")
 	@ResponseBody
@@ -41,11 +44,13 @@ public class UserController {
 		return user;
 	}
 	
-	@RequestMapping("/save.do")
+	@RequestMapping("/addAdmin")
 	@ResponseBody
-	public String save(User user){
-		serviceImpl.insert(user);
-		return "success";
+	public String addAdmin(User user){
+		int rows = serviceImpl.insert(user);
+		if(rows == 1)
+			return "添加成功";
+		return "添加失败";
 	}
 
 	@RequestMapping("/login.do")
@@ -92,6 +97,7 @@ public class UserController {
 
 	}
 	//注册
+	@ResponseBody
 	@RequestMapping("/register")
 	public GetRegisterResult register(String phone,String password,String code,int roleId) {
 		boolean bPhone = Pattern.matches(REGEX_PHONE,phone);
@@ -165,10 +171,29 @@ public class UserController {
 		User user = serviceImpl.selectUser(username, password);
 		if (user != null) {
 			request.getSession().setAttribute("user", user);
+			Map<String, Object> map = new HashMap<String,Object>();
+			map.put("roleid", user.getRoleid());
+			List<RoleMenu> Menulist = roleMenuService.selectByMap(map);
+			request.getSession().setAttribute("Menulist", Menulist);
 			return "pre/index";
 		}else {
 			request.setAttribute("error", "用户名或密码错误");
 			return "login";
 		}		
+	}
+	@ResponseBody
+	@RequestMapping("/selectUserList")
+	public Map<String, Object> selectUserList(Integer page,Integer limit) {
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		
+		int count = serviceImpl.selectUserListCount();
+		int begin = (page-1) * limit;
+		int end = limit;
+		List<UserVO> userList = serviceImpl.selectUserList(begin,end);
+		resultMap.put("count", count);
+		resultMap.put("data", userList);
+		System.out.println("111111111111");
+		return resultMap;
+		
 	}
 }

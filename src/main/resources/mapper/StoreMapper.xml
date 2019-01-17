@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boyu.kiss.mapper.StoreMapper">
+	<select id="getCountStore" resultType="int">
+		select count(1) 
+		from t_store 
+		<where>
+			<if test="ownerName != null and ownerName != ''">
+				and ownerName = #{ownerName}
+			</if>
+			<if test="storeName != null and storeName != ''">
+				and storeName = #{storeName}
+			</if>			
+		</where>
+	</select>
+	
+	<select id="getStoreVo" resultType="StoreVo">
+		select storeName,ownerName,shtg,type
+		from t_store
+		<where>
+			<if test="ownerName != null and ownerName != ''">
+				and ownerName = #{ownerName}
+			</if>
+			<if test="storeName != null and storeName != ''">
+				and storeName = #{storeName}
+			</if>	
+		</where>
+		<if test="begin != null and end != null">
+		LIMIT #{begin} , #{end}
+		</if> 
+	</select>
+	
+</mapper>

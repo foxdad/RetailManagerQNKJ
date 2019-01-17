@@ -4,17 +4,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.boyu.kiss.entity.Commodity;
+import com.boyu.kiss.entity.CommodityType;
 import com.boyu.kiss.entity.OrderVO;
-import com.boyu.kiss.entity.RoleMenu;
 import com.boyu.kiss.entity.Store;
 import com.boyu.kiss.entity.User;
 import com.boyu.kiss.entity.UserInfo;
 import com.boyu.kiss.mapper.UserMapper;
 import com.boyu.kiss.result.ShopcartResults;
+import com.boyu.kiss.result.UserVO;
 import com.boyu.kiss.service.IUserService;
 
 /**
@@ -37,8 +39,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper,User> implements
 	private ShopcartServiceImpl shopcartService;
 	@Autowired
 	private CommodityServiceImpl commodityService;
+
 	@Autowired
-	private RoleMenuServiceImpl roleMenuService;
+	private CommodityTypeServiceImpl commodityTypeService;
 	public Map<String, Object> login(String username, String password, int roleId) {
 		
 		List<User> list = null;
@@ -75,6 +78,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper,User> implements
 					Map<String, Object> commodityMap = new HashMap<String,Object>();
 					commodityMap.put("storeId", storeId);
 					List<Commodity> commodityList = commodityService.selectByMap(commodityMap);
+					Map<String, Object> typemap = new  HashMap<String,Object>();
+					typemap.put("storeId", storeId);
+					List<CommodityType> commodityTypeList = commodityTypeService.selectByMap(typemap);
+					resultMap.put("commodityTypeList", commodityTypeList);
 					resultMap.put("user", user);
 					resultMap.put("userInfo", userInfo);
 					resultMap.put("orderList", orderList);
@@ -107,12 +114,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper,User> implements
 					
 				}
 				// maps.put("userlist", list);
-				else if(roleId == 4 || roleId == 5){
-					Map<String, Object> map = new HashMap<String,Object>();
-					map.put("roleid", roleId);
-					List<RoleMenu> Menulist = roleMenuService.selectByMap(map);
-					resultMap.put("user", user);
-					resultMap.put("Menulist", Menulist);
+				else {
 				}
 			}
 			
@@ -131,6 +133,14 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper,User> implements
 		return userMapper.selectUser(username, password);
 	}
 
-
+	
+	public List<UserVO> selectUserList(int begin,int end) {
+		List<UserVO> list = userMapper.selectUserList(begin,end);
+		return list;
+	}
+	public int selectUserListCount() {
+		int count = userMapper.selectUserListCount();
+		return count;
+	}
 
 }

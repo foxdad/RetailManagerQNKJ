@@ -30,7 +30,7 @@
                 <div class="control-group">
                   <label class="control-label">用户名</label>
                   <div class="controls">
-                    <input id="username" type="text" name="username" />
+                    <input id="userName" type="text" name="userName" />
                   </div>
                 </div>
                 <div class="control-group">
@@ -40,37 +40,20 @@
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label">重复密码</label>
+                  <label class="control-label">角色</label>
                   <div class="controls">
-                    <input id="password2" type="password" name="password2" />
-                  </div>
-                </div>
-                <div class="control-group">
-                  <label class="control-label">部门</label>
-                  <div class="controls">
-                  	<select id="department" name="department" style="width: 221px;">
-						<c:if test="${departmentList != null }">
+                  	<select id="roleId" name="roleid" style="width: 221px;">
+						<%-- <c:if test="${roleList != null }">
 							<option value="0">----请选择----</option>
-							<c:forEach var="department" items="${departmentList}">
-							<option value="${department.departmentId}">${department.departmentName}</option>
+							<c:forEach var="role" items="${roleList}">
+							<option value="${role.roleId}">${role.roleName}</option>
 							</c:forEach>
-						</c:if>
+						</c:if> --%>
+						<option value="4">管理员</option>
+						<option value="5">超级管理员</option>
 					</select>
                   </div>
                 </div>
-                <div class="control-group">
-                  <label class="control-label">职位</label>
-                  <div class="controls">
-                    <select id="power" name="power" style="width: 221px;">
-						<c:if test="${pList != null }">
-							<option value="0">----请选择----</option>
-							<c:forEach var="power" items="${pList}">
-							<option value="${power.powerId}">${power.powerName}</option>
-							</c:forEach>
-						</c:if>
-					</select>
-                  </div>
-                </div>                
               </div>
               <div class="form-actions">
                 <input id="back" class="btn btn-primary" type="button" value="返回" onclick="javascript:history.go(-1);" />
@@ -90,25 +73,21 @@
 <script src="${ctx}/statics/layui/layui.js"></script>
 <script type="text/javascript">
 $("#adduser").click(function(){
-	 var username = $("#username").val();
+
+	
+	 var userName = $("#userName").val();
 	 var password = $("#password").val();
-	 var password2 = $("#password2").val();
-	 var department = $("#department").val();
-	 var power = $("#power").val();
+	 var roleId = $("#roleId").val();
 	 
-	  if(username == null || username == ""){
+	  if(userName == null || userName == ""){
 			 layui.use('layer', function(){
 				 var layer = layui.layer;
 				 layer.msg('请输入姓名');
 			 }) 
 	  }else if(password == null || password == ""){
 		  layer.msg('请输入密码'); 
-	  }else if(password2 != password){
-		  layer.msg('两次密码不一致'); 
-	  }else if(department == null || department == 0){
+	  }else if(roleId == null || roleId == 0){
 		  layer.msg('请选择部门');
-	  }else if(power == null || power == 0){
-		  layer.msg('请选择职位');
 	  }else{
 // 			$.ajax({
 // 	            type: "POST",
@@ -126,13 +105,13 @@ $("#adduser").click(function(){
 // 	            }
 // 	        });
 			
-			$.post('/ERP/adduser', {
-				username : username,
-            	password2 : password2,
-            	department : department,
-            	power : power
+			$.post('/RetailManager/addAdmin', {
+				userName : userName,
+            	password : password,
+            	roleid : roleId,
 			}, function(str){
 				  layer.alert(str);
+				  alert(str);
 				});
 	  }	
 	    
